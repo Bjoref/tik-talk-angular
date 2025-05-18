@@ -1,1 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
+@use './fonts.scss';
+
+:root {
+    --dark-color: #000000;
+    --light-color: #FFFFFF;
+
+    --font-stack: 'JetBrainsMono', sans-serif
+}
+
+body {
+    background: var(--dark-color);
+    color: var(--light-color);
+    font-family: var(--font-stack);
+}
