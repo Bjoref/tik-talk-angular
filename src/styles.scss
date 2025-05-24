@@ -1,16 +1,23 @@
 @use './reset.scss';
 @use './fonts.scss';
+@use './typography.scss' as *;
 
 :root {
     --dark-color: #000000;
     --light-color: #FFFFFF;
     --primary-color: #AE7AFF;
+    --grey-color: #5F646D;
 
     --font-stack: 'JetBrainsMono', sans-serif
 }
 
 body {
-    background: var(--dark-color);
     color: var(--light-color);
     font-family: var(--font-stack);
+    background-image: url(/assets/img/bg.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

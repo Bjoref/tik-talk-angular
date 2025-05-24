@@ -1,0 +1,30 @@
+@mixin heading-typography($size, $lh, $ls: 0) {
+    font-size: $size;
+    font-weight: 800;
+    letter-spacing: $ls;
+    line-height: $lh;
+}
+
+@mixin heading-1 {
+    @include heading-typography(48px, 56px);
+}
+
+@mixin heading-2 {
+    @include heading-typography(36px, 46px);
+}
+
+@mixin heading-3 {
+    @include heading-typography(30px, 38px);
+}
+
+@mixin heading-4 {
+    @include heading-typography(24px, 32px);
+}
+
+@mixin heading-5 {
+    @include heading-typography(20px, 28px);
+}
+
+@mixin heading-6 {
+    @include heading-typography(18px, 24px);
+}

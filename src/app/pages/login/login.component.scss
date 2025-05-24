@@ -1,0 +1,46 @@
+@use '../../../typography.scss' as *;
+
+:host {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 100dvh;
+    align-items: center;
+    margin: 0 5%;
+}
+
+
+.login {
+    &__title {
+        margin-bottom: 60px;
+        @include heading-1;
+    }
+
+    &__form {
+        width: 440px;
+    }
+
+    &__inputs {
+        margin-bottom: 32px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    &__label {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__input {
+        margin-top: 8px;
+        background: var(--dark-color);
+        padding: 12px 20px;
+        border: 1px solid var(--light-color);
+        border-radius: 4px;
+    }
+
+    &__image {
+        display: grid;
+        place-items: center center;
+    }
+}

@@ -1,3 +1,3 @@
-<button class="ui-button">
-    Подписаться
+<button class="ui-button" [ngClass]="{'ui-button_shadow' : shadow}" [type]="buttonType">
+    {{ text }}
 </button>

@@ -1,0 +1,29 @@
+<form class="login__form" [formGroup]="form" (ngSubmit)="onSubmit($event)">
+    <h1 class="login__title">
+        Вход
+    </h1>
+
+    <div class="login__inputs">
+        @for(input of inputs; track input) {
+            <label class="login__label mb32">
+                {{ input.label }}
+                <input 
+                    [formControlName]="input.formControlName" 
+                    [type]="input.type" 
+                    [placeholder]="input.placeholder" 
+                    [autocomplete]="input.autocomplete" 
+                    class="login__input"
+                >
+            </label>
+        }
+    </div>
+
+    <div class="login__actions">
+        <ui-button [text]="'Войти'" [buttonType]="'submit'" [shadow]="true"></ui-button>
+    </div>
+
+</form>
+
+<div class="login__image">
+    <img src="/assets/img/login-component/login-logo.svg" alt="login-logo">
+</div>

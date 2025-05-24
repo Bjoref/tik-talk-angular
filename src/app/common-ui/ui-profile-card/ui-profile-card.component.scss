@@ -3,12 +3,13 @@
         border: 1px solid var(--light-color);
         padding: 32px 24px;
         display: grid;
-        grid-template-columns: repeat(2, 1fr) 250px 1fr;
+        grid-template-columns:  minmax(20px, 232px) minmax(20px, 284px) 200px 1fr;
         grid-gap: 32px;
+        align-items: center;
 
         &__user {
             display: grid;
-            grid-template-columns: 70px 1fr;
+            grid-template-columns: 70px auto;
             grid-gap: 20px;
 
             &-avatar {
@@ -19,12 +20,17 @@
             }
 
             &-name {
+                max-width: fit-content;
                 display: flex;
                 flex-direction: column;
                 gap: 8px;
             }
         }
 
+        &__description {
+            align-self: flex-start;
+        }
+        
         &__tags {
             display: flex;
             flex-wrap: wrap;
