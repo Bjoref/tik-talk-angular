@@ -1,0 +1,41 @@
+@if(profile) {
+    <div class="profile-card">
+        <div class="profile-card__user">
+            @if(profile.avatarUrl) {
+                
+            }
+            <img 
+                [src]="profile.avatarUrl | imgUrl" 
+                [alt]="profile.lastName"
+                class="profile-card__user-avatar"
+            >
+    
+            <div class="profile-card__user-name">
+                <strong>
+                    {{ profile.firstName}}
+                </strong>
+    
+                <span>
+                    {{ profile.username}}
+                </span>
+            </div>
+    
+        </div>
+    
+        <div class="profile-card__description">
+            {{ profile.description}}
+        </div>
+    
+        <ul class="profile-card__tags">
+            @for(tag of profile.stack; track $index) {
+                <li>
+                    <ui-tag [tagText]="tag"></ui-tag>
+                </li>
+            }
+        </ul>
+    
+        <div class="profile-card__actions">
+            <ui-button></ui-button>
+        </div>
+    </div>
+}

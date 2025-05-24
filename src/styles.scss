@@ -1,8 +1,10 @@
+@use './reset.scss';
 @use './fonts.scss';
 
 :root {
     --dark-color: #000000;
     --light-color: #FFFFFF;
+    --primary-color: #AE7AFF;
 
     --font-stack: 'JetBrainsMono', sans-serif
 }
