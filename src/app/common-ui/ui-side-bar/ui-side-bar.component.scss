@@ -1,3 +1,111 @@
+@use '../../../typography.scss' as *;
+
 :host {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 12px;
     background-color: var(--dark-color);
+    height: 100%;
+}
+
+.side-bar {
+    &__logo {
+        width: 61px;
+        height: 74px;
+        margin-bottom: 20px;
+    }
+
+    &__menu {
+        &-list {
+            display: grid;
+            grid-gap: 8px;
+        }
+
+        &-button {
+            display: grid;
+            align-items: center;
+            grid-template-columns: 16px 1fr max-content;
+            grid-gap: 12px;
+            width: 100%;
+            padding: 16px 12px;
+            text-align: left;
+            cursor: pointer;
+            border: none;
+            border-radius: 2px;
+            @include button-2;
+
+            &:hover,
+            &:focus-visible {
+                background: var(--dark-hover-color);
+                color: var(--primary-color);
+
+                .side-bar__menu-svg {
+                    color: var(--primary-color);
+                }
+            }
+        }
+
+        &-svg {
+            width: 16px;
+            height: 16px;
+        }
+    }
+
+    &__title {
+        margin-bottom: 20px;
+        @include text-medium;
+    }
+
+    &__subscribers {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    &__actions {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+
+        &-link {
+            color: var(--primary-color);
+            @include text-medium;
+        }
+
+        &-svg {
+            color: var(--primary-color);
+            width: 6px;
+            height: 10px;
+        }
+    }
+
+    &__footer {
+        margin-top: auto;
+        padding: 4px 16px;
+        display: grid;
+        grid-template-columns: 32px 1fr 16px;
+        grid-gap: 12px;
+        align-items: center;
+        border-radius: 2px;
+        background: var(--dark-hover-color);
+
+        &-img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+        }
+
+        &-username {
+            color: var(--primary-color);
+            @include button-2;
+        }
+
+        &-icon {
+            color: var(--primary-color);
+            height: 14px;
+            width: 14px;
+        }
+
+    }
+
 }

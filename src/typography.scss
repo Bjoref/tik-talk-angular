@@ -1,3 +1,5 @@
+//HEADINGS
+
 @mixin heading-typography($size, $lh, $ls: 0) {
     font-size: $size;
     font-weight: 800;
@@ -27,4 +29,38 @@
 
 @mixin heading-6 {
     @include heading-typography(18px, 24px);
+}
+
+//BUTTONS
+
+@mixin button-typography($size, $lh, $ls: 0) {
+    font-size: $size;
+    font-weight: 700;
+    letter-spacing: $ls;
+    line-height: $lh;
+}
+
+@mixin button-1 {
+    @include button-typography(12px, 16px);
+}
+
+@mixin button-2 {
+    @include button-typography(14px, 24px);
+}
+
+@mixin button-3 {
+    @include button-typography(16px, 24px);
+}
+
+//TEXT
+
+@mixin text-typography($size, $lh, $fw: 400, $ls: 0) {
+    font-size: $size;
+    font-weight: $fw;
+    letter-spacing: $ls;
+    line-height: $lh;
+}
+
+@mixin text-medium {
+    @include text-typography(12px, 16px, 500);
 }

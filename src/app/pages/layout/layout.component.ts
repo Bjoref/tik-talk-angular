@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { UiSideBarComponent } from '../../common-ui/ui-side-bar/ui-side-bar.component';
 
@@ -9,5 +9,4 @@ import { UiSideBarComponent } from '../../common-ui/ui-side-bar/ui-side-bar.comp
   styleUrl: './layout.component.scss'
 })
 export class LayoutComponent {
-
 }

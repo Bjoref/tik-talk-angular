@@ -1,8 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators  } from '@angular/forms';
 import { FormInput } from '../../data/types/formInput';
 import { UiButtonComponent } from '../../common-ui/ui-button/ui-button.component';
 import { AuthHttpService } from '../../data/services/auth-http.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'page-login',
@@ -12,6 +13,9 @@ import { AuthHttpService } from '../../data/services/auth-http.service';
 })
 export class LoginComponent {
   authService = inject(AuthHttpService);
+  router: Router = inject(Router);
+
+  isPasswordVisible = signal<boolean>(false)
 
 
   public inputs: FormInput[] = [
@@ -34,21 +38,22 @@ export class LoginComponent {
 
   ]
   public form: FormGroup = new FormGroup({
-    username: new FormControl(null, Validators.required),
-    password: new FormControl(null, Validators.required),
+    username: new FormControl<string | null>(null, Validators.required),
+    password: new FormControl<string | null>(null, Validators.required),
   })
 
   onSubmit(event: Event) {
-    console.log(this.form.value)
-    console.log(this.form.valid)
-
     if(this.form.valid) {
       this.authService.login(this.form.value)
         .subscribe(val => {
-          console.log(val)
+          this.router.navigate([''])
         })    
     }
 
 
+  }
+
+  changeVisibility():void {
+    this.isPasswordVisible.set(!this.isPasswordVisible)
   }
 }

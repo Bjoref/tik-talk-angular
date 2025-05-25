@@ -16,9 +16,7 @@ export class SearchComponent {
   constructor() {
     this.profileService.getTestsAccounts()
       .subscribe(val => {
-        console.log(val)
         this.profiles = val;
-        console.log(this.profiles)
       })    
   }
 }
