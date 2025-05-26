@@ -1,0 +1,57 @@
+@use '../../../typography.scss' as *;
+
+.settings {
+    &__form {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 32px;
+        height: calc(100dvh - (24px * 4));
+        background: var(--dark-color);
+        border: 1px solid var(--light-color);
+
+        &-content {
+            display: grid;
+            grid-gap: 20px;
+        }
+
+        &-columns {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 20px;
+        }
+
+        &-label {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            
+            &-text {
+                color: var(--light-transparent-color);
+                @include text-medium;
+            }
+        }
+
+        &-input {
+            height: 33px;
+            border: none;
+            border-bottom: 1px solid var(--light-color);
+            background: none;
+            @include text-regular-1;
+
+            &:focus-visible {
+                outline: 1px solid var(--primary-color);
+
+            }
+        }
+
+        &-textarea {
+            height: 84px;
+            border: none;
+            border-bottom: 1px solid var(--light-color);
+            resize: none;
+            @include text-regular-1;
+        }
+    }
+
+}

@@ -8,11 +8,13 @@
     --primary-color: #AE7AFF;
     --grey-color: #5F646D;
     --dark-hover-color: #161616;
+    --light-transparent-color: rgba(255, 255, 255, .75);
 
     --font-stack: 'JetBrainsMono', sans-serif
 }
 
 body {
+    height: 100dvh;
     color: var(--light-color);
     font-family: var(--font-stack);
     background-image: url(/assets/img/bg.jpg);

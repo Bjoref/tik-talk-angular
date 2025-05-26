@@ -1,5 +1,9 @@
+@use '../../../typography.scss' as *;
+
 .profile {
+    padding: 24px;
     &__header {
+        margin-bottom: 24px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -20,6 +24,64 @@
     &__main {
         display: grid;
         grid-gap: 64px;
+        padding: 24px;
         grid-template-columns: 1fr 350px;
+
+        &-title {
+            margin-bottom: 16px;
+            @include heading-6
+        }
+
+        &-img {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+        }
+
+        &-list {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 32px;
+        }
+
+        &-link {
+            width: 14px;
+            height: 14px;
+            position: relative;
+            border-radius: 50%;
+            background-color: var(--light-color);
+
+            &::before,
+            &::after {
+                content: '';
+                position: absolute;
+                width: 1px;
+                height: 8px;
+                top: 50%;
+                left: 50%;
+                background: var(--dark-color);
+            }
+
+            &::before {
+                transform: translateY(-50%) translateX(-50%);
+            }
+
+            &:after {
+                transform: translateY(-50%) translateX(-50%) rotate(90deg);
+            }
+        }
+
+        &-tags {
+            margin-bottom: 32px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            max-height: fit-content;
+        }
+
+        &-description {
+            @include text-medium;
+        }
     }
 }

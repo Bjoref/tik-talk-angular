@@ -25,14 +25,19 @@ export class ProfileHttpService extends HttpService {
       )
   }
 
-  getSubscribersShortList() {
+  getSubscribersShortList(amount: number = 3) {
     return this.http.get<Pageable<Profile>>(`${this.baseApiUrl}account/subscribers/`)
       .pipe(
-        map(res => res.items.slice(0, 3))
+        map(res => res.items.slice(0, amount))
       )
   }
 
   getAccount(id: string | number) {
     return this.http.get<Profile>(`${this.baseApiUrl}account/${id}`)
+  }
+
+  patchProfile(profile: Partial<Profile>) {
+    return this.http.patch<Profile>(`${this.baseApiUrl}account/me`, profile)
+
   }
 }

@@ -17,7 +17,6 @@
     Подписчики
 </p>
 
-<!-- <ui-subscriber-card></ui-subscriber-card> -->
 <div class="side-bar__subscribers">
     @for (profile of subscribers$ | async; track profile.id) {
         <ui-subscriber-card [profile]="profile"></ui-subscriber-card>

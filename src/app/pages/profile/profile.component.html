@@ -1,30 +1,52 @@
-@if(profile$ | async; as profile) {
-    <header class="profile__header">
-        <ui-profile-header [profile]="profile"></ui-profile-header>
+<section class="profile">
+    @if(profile$ | async; as profile) {
+        <header class="profile__header">
+            <ui-profile-header [profile]="profile"></ui-profile-header>
 
-        <a class="profile__header-link btn" [routerLink]="['settings']">
-            Редактировать
+            <a class="profile__header-link btn" [routerLink]="['/settings']">
+                Редактировать
 
-            <svg icon="settings" class="profile__header-svg"></svg>
-        </a>
-    </header>
+                <svg icon="settings" class="profile__header-svg"></svg>
+            </a>
+        </header>
 
-    <main class="profile__main">
-        <div></div>
+        <main class="profile__main">
+            <ui-post-feed></ui-post-feed>
 
-        <div>
-            <ul class="side-bar__menu-list">
-                <!-- @for (item of menuItems; track $index) {
-                    <li class="side-bar__menu-item">
-                        <a class="side-bar__menu-button" [routerLink]="item.link">
-                            <svg [icon]="item.icon" class="side-bar__menu-svg"></svg>
-                            <span>
-                                {{ item.label }}
-                            </span>
-                        </a>
-                    </li>
-                } -->
-            </ul>
-        </div>
-    </main>
-} 
+            <div>
+                <h3 class="profile__main-title">Подписчики</h3> 
+                <ul class="profile__main-list">
+                    @for (profile of subscribers$ | async; track profile.id) {
+                        <li>
+                            <a [routerLink]="['/profile', profile.id]">
+                                @if(profile.avatarUrl) {
+                                    <img [src]="profile.avatarUrl | imgUrl" [alt]="profile.firstName" class="profile__main-img">
+                                } @else {
+                                    <img src="/assets/img/icons/avatar-placeholder.svg" [alt]="profile.firstName" class="profile__main-img">
+                                }
+                            </a>
+                        </li>
+                    }
+                    <a class="profile__main-link" [routerLink]="['/search']">
+
+                    </a>
+                </ul>
+
+                <h3 class="profile__main-title">Навыки</h3>
+                
+                <ul class="profile__main-tags">
+                    @for(tag of profile.stack; track $index) {
+                        <li>
+                            <ui-tag [tagText]="tag"></ui-tag>
+                        </li>
+                    }
+                </ul>
+
+                <h3 class="profile__main-title">О себе</h3>
+
+                <p class="profile__main-description"> {{ profile.description }} </p>
+
+            </div>
+        </main>
+    } 
+</section>
