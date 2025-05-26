@@ -29,14 +29,36 @@ export class SettingsComponent {
     if(this.form.invalid) return;
 
     //@ts-ignore
-    firstValueFrom(this.profileService.patchProfile(this.form.value));
+    firstValueFrom(this.profileService.patchProfile({
+      ...this.form.value,
+      stack: this.splitStack(this.form.value.stack)
+    }));
+  }
 
+  splitStack(stack: string | null | string[] | undefined):string[] {
+    if(Array.isArray(stack)) return stack
+
+    if(!stack) return [];
+
+    return stack.split(',')
+  }
+
+  mergeStack(stack: string | null | string[]):string {
+    if(Array.isArray(stack)) return stack.join(',')
+
+    if(!stack) return '';
+
+    return stack;
   }
 
   constructor() {
     effect(() => {
       //@ts-ignore
-      this.form.patchValue(this.profileService.me())
+      this.form.patchValue({
+        ...this.profileService.me(),
+        //@ts-ignore
+        stack: this.mergeStack(this.profileService.me()?.stack)
+      })
     })
   }
 }

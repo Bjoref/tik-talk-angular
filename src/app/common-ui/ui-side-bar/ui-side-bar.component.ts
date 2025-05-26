@@ -24,7 +24,7 @@ export class UiSideBarComponent {
     {
       label: 'Моя страница',
       icon: 'home',
-      link: ''
+      link: 'profile/me'
     },
     {
       label: 'Чаты',
