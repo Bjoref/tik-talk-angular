@@ -1,0 +1,25 @@
+.profile {
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        &-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            width: 174px;
+        }
+
+        &-svg {
+            width: 16px;
+            height: 16px;
+        }
+    }
+
+    &__main {
+        display: grid;
+        grid-gap: 64px;
+        grid-template-columns: 1fr 350px;
+    }
+}

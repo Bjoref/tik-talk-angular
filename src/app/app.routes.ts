@@ -8,7 +8,7 @@ import { accessGuard } from './data/guards/access.guard';
 export const routes: Routes = [
     { path: '', component: LayoutComponent, children: [
         { path: '', component: SearchComponent},
-        { path: 'profile', component: ProfileComponent},
+        { path: 'profile/:id', component: ProfileComponent},
     ],
     canActivate: [accessGuard]
     },

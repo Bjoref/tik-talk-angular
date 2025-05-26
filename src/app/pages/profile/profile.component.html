@@ -1,1 +1,30 @@
-<p>profile works!</p>
+@if(profile$ | async; as profile) {
+    <header class="profile__header">
+        <ui-profile-header [profile]="profile"></ui-profile-header>
+
+        <a class="profile__header-link btn" [routerLink]="['settings']">
+            Редактировать
+
+            <svg icon="settings" class="profile__header-svg"></svg>
+        </a>
+    </header>
+
+    <main class="profile__main">
+        <div></div>
+
+        <div>
+            <ul class="side-bar__menu-list">
+                <!-- @for (item of menuItems; track $index) {
+                    <li class="side-bar__menu-item">
+                        <a class="side-bar__menu-button" [routerLink]="item.link">
+                            <svg [icon]="item.icon" class="side-bar__menu-svg"></svg>
+                            <span>
+                                {{ item.label }}
+                            </span>
+                        </a>
+                    </li>
+                } -->
+            </ul>
+        </div>
+    </main>
+} 

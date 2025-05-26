@@ -1,3 +1,7 @@
-<button class="ui-button" [ngClass]="{'ui-button_shadow' : shadow}" [type]="buttonType">
+<button class="ui-button btn" [ngClass]="{'ui-button_shadow' : shadow, 'ui-button_with-icon' : icon.length}" [type]="buttonType">
     {{ text }}
+
+    @if(icon.length) {
+        <svg [icon]="icon" class="ui-button__svg"></svg>
+    }
 </button>

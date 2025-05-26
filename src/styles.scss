@@ -20,5 +20,12 @@ body {
     background-repeat: no-repeat;
     background-size: 100% auto;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.btn {
+    padding: 10px 20px;
+    background: var(--primary-color);
+    color: var(--dark-color);
+    border: 1px solid var(--dark-color);
+    border-radius: 4px;
+    @include button-2;
+}

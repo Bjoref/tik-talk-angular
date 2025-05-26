@@ -1,0 +1,28 @@
+@use '../../../typography.scss' as *;
+
+:host {
+    display: grid;
+    grid-template-columns: 112px 1fr;
+    align-items: center;
+    gap: 24px;
+}
+
+.ui-profile-header {
+    &__img {
+        width: 112px;
+        height: 112px;
+        border-radius: 50%;
+    }
+
+    &__profile {
+        text-align: left
+    }
+
+    &__name {
+        @include heading-4;
+    }
+
+    &__username {
+        @include text-regular-1;
+    }
+}

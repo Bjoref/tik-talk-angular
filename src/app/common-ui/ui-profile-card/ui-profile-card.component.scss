@@ -11,6 +11,7 @@
             display: grid;
             grid-template-columns: 70px auto;
             grid-gap: 20px;
+            align-items: center;
 
             &-avatar {
                 width: 70px;

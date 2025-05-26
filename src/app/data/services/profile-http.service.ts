@@ -31,4 +31,8 @@ export class ProfileHttpService extends HttpService {
         map(res => res.items.slice(0, 3))
       )
   }
+
+  getAccount(id: string | number) {
+    return this.http.get<Profile>(`${this.baseApiUrl}account/${id}`)
+  }
 }
