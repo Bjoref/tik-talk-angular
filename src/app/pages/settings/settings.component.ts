@@ -1,4 +1,4 @@
-import { Component, effect, inject } from '@angular/core';
+import { Component, effect, inject, ViewChild } from '@angular/core';
 import { UiProfileHeaderComponent } from "../../common-ui/ui-profile-header/ui-profile-header.component";
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ProfileHttpService } from '../../data/services/profile-http.service';
@@ -12,7 +12,10 @@ import { UiAvatarUploadComponent } from '../../common-ui/ui-avatar-upload/ui-ava
   styleUrl: './settings.component.scss'
 })
 export class SettingsComponent {
+  @ViewChild(UiAvatarUploadComponent) uiAvatar!: UiAvatarUploadComponent
+
   profileService = inject(ProfileHttpService);
+  
   fb = inject(FormBuilder);
 
   form = this.fb.group({
@@ -34,6 +37,10 @@ export class SettingsComponent {
       ...this.form.value,
       stack: this.splitStack(this.form.value.stack)
     }));
+
+    if(this.uiAvatar.avatar) {
+      firstValueFrom(this.profileService.uploadAvatar(this.uiAvatar.avatar))
+    }
   }
 
   splitStack(stack: string | null | string[] | undefined):string[] {
@@ -52,14 +59,4 @@ export class SettingsComponent {
     return stack;
   }
 
-  constructor() {
-    effect(() => {
-      //@ts-ignore
-      this.form.patchValue({
-        ...this.profileService.me(),
-        //@ts-ignore
-        stack: this.mergeStack(this.profileService.me()?.stack)
-      })
-    })
-  }
 }

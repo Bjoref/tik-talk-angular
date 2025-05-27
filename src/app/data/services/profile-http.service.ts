@@ -11,6 +11,7 @@ import { Pageable } from '../interfaces/pageable.interface';
 export class ProfileHttpService extends HttpService {
 
   me = signal<Profile | null>(null) ;
+  filteredProfiles = signal<Profile[]>([]);
 
   getTestsAccounts(): Observable<Profile[]> {
     return this.http.get<Profile[]>(`${this.baseApiUrl}account/test_accounts`)
@@ -38,6 +39,19 @@ export class ProfileHttpService extends HttpService {
 
   patchProfile(profile: Partial<Profile>) {
     return this.http.patch<Profile>(`${this.baseApiUrl}account/me`, profile)
+  }
 
+  uploadAvatar(file: File) {
+    const fd: FormData = new FormData();
+    fd.append('image', file);
+
+    return this.http.post(`${this.baseApiUrl}account/upload_image`, fd);
+  }
+
+  filterProfiles(params: Record<string, any>) {
+    return this.http.get<Pageable<Profile>>(`${this.baseApiUrl}account/accounts`, {params})
+      .pipe(
+        tap(res => this.filteredProfiles.set(res.items))
+      );
   }
 }

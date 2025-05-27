@@ -1,7 +1,8 @@
-import { Component, signal } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { UiSvgComponent } from '../ui-svg/ui-svg.component';
 import { DndDirective } from '../../data/directives/dnd.directive';
 import { FormsModule } from '@angular/forms';
+import { ProfileHttpService } from '../../data/services/profile-http.service';
 
 @Component({
   selector: 'ui-avatar-upload',
@@ -11,7 +12,15 @@ import { FormsModule } from '@angular/forms';
 })
 export class UiAvatarUploadComponent {
   preview = signal<string>('/assets/img/icons/avatar-placeholder.svg');
-  avatar = null;
+  avatar: File | null = null;
+
+  profileService = inject(ProfileHttpService);
+
+  constructor() {
+    effect(() => {
+      this.preview.set(this.profileService.me()?.avatarUrl ? `https://icherniakov.ru/yt-course/${this.profileService.me()?.avatarUrl}` : '/assets/img/icons/avatar-placeholder.svg')
+    });
+  }
 
   fileBrowserHandler(event: Event) {
     const file = (event.target as HTMLInputElement)?.files?.[0];
@@ -32,7 +41,8 @@ export class UiAvatarUploadComponent {
       this.preview.set(event.target?.result?.toString() ?? '');
     }
 
-    reader.readAsDataURL(file)
-  }
+    reader.readAsDataURL(file);
 
+    this.avatar = file;
+  }
 }

@@ -13,14 +13,18 @@
     --font-stack: 'JetBrainsMono', sans-serif
 }
 
+html, body {
+    height: 100%;
+}
+
 body {
-    height: 100dvh;
     color: var(--light-color);
     font-family: var(--font-stack);
     background-image: url(/assets/img/bg.jpg);
     background-position: center;
     background-repeat: no-repeat;
-    background-size: 100% auto;
+    background-size: cover;
+    background-color: var(--dark-hover-color);
 }
 
 .btn {

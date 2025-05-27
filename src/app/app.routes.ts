@@ -8,9 +8,10 @@ import { SettingsComponent } from './pages/settings/settings.component';
 
 export const routes: Routes = [
     { path: '', component: LayoutComponent, children: [
-        { path: '', component: SearchComponent},
+        { path: '', redirectTo: 'profile/me', pathMatch: 'full'},
         { path: 'profile/:id', component: ProfileComponent},
-        { path: 'settings', component: SettingsComponent}
+        { path: 'settings', component: SettingsComponent},
+        { path: 'search', component: SearchComponent}
     ],
     canActivate: [accessGuard]
     },
