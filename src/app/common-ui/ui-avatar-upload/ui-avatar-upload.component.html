@@ -1,1 +1,12 @@
-<p>ui-avatar-upload works!</p>
+<img [src]="preview()" alt="placeholder" class="ui-avatar-upload__img">
+
+<div dnd class="ui-avatar-upload__dropzone" tabindex="0" (keyup.enter)="fileDrop.click()" (fileDropped)="onFileDroped($event)">
+
+    <div class="ui-avatar-upload__dropzone-content">
+        <svg icon="upload" class="ui-avatar-upload__dropzone-icon"></svg>
+        <span class="ui-avatar-upload__dropzone-text">
+            Перетащите изображение или Загрузите
+        </span>
+    </div>
+    <input class="ui-avatar-upload__input" tabindex="-1" type="file" #fileDrop (change)="fileBrowserHandler($event)" [(ngModel)]="avatar">
+</div>
