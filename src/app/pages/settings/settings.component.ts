@@ -3,10 +3,11 @@ import { UiProfileHeaderComponent } from "../../common-ui/ui-profile-header/ui-p
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ProfileHttpService } from '../../data/services/profile-http.service';
 import { firstValueFrom } from 'rxjs';
+import { UiAvatarUploadComponent } from '../../common-ui/ui-avatar-upload/ui-avatar-upload.component';
 
 @Component({
   selector: 'settings',
-  imports: [UiProfileHeaderComponent, ReactiveFormsModule],
+  imports: [UiProfileHeaderComponent, ReactiveFormsModule, UiAvatarUploadComponent],
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.scss'
 })
