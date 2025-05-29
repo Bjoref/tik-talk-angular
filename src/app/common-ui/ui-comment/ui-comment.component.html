@@ -1,0 +1,15 @@
+@if (comment(); as comment) {
+    <div class="ui-comment">
+        <ui-avatar [avatarUrl]="comment.author.avatarUrl"></ui-avatar>
+        <div class="ui-comment__content">
+            <div class="ui-comment__header">
+                <span> {{ comment.author.username }}</span>
+                <span class="ui-comment__created-at">
+                    {{ comment.createdAt | date: 'HH:mm dd.MM.YY'}}
+                </span>
+            </div>
+            
+            <p class="ui-comment__text">{{ comment.text }}</p>
+        </div>
+    </div>
+}

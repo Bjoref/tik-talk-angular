@@ -1,0 +1,5 @@
+@if(avatarUrl) {
+    <img [src]="avatarUrl | imgUrl" class="ui-avatar__img">
+} @else {
+    <img src="/assets/img/icons/avatar-placeholder.svg" class="ui-avatar__img">
+}

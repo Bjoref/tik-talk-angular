@@ -1,0 +1,17 @@
+@use "../../../typography.scss" as *;
+
+.ui-comment {
+	margin-bottom: 16px;
+	display: grid;
+	grid-template-columns: 32px 1fr;
+	grid-gap: 16px;
+
+	&__header {
+		color: var(--light-transparent-color);
+		@include text-medium;
+	}
+
+	&__text {
+		@include text-medium;
+	}
+}

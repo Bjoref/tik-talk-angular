@@ -19,11 +19,7 @@
                     @for (profile of subscribers$ | async; track profile.id) {
                         <li>
                             <a [routerLink]="['/profile', profile.id]">
-                                @if(profile.avatarUrl) {
-                                    <img [src]="profile.avatarUrl | imgUrl" [alt]="profile.firstName" class="profile__main-img">
-                                } @else {
-                                    <img src="/assets/img/icons/avatar-placeholder.svg" [alt]="profile.firstName" class="profile__main-img">
-                                }
+                                <ui-avatar [avatarUrl]="profile.avatarUrl"></ui-avatar>
                             </a>
                         </li>
                     }

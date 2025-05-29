@@ -6,9 +6,9 @@ import { switchMap } from 'rxjs';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { UiSvgComponent } from '../../common-ui/ui-svg/ui-svg.component';
-import { ImgUrlPipe } from '../../helpers/pipes/img-url.pipe';
 import { UiTagComponent } from '../../common-ui/ui-tag/ui-tag.component';
 import { UiPostFeedComponent } from '../../common-ui/ui-post-feed/ui-post-feed.component';
+import { UiAvatarComponent } from '../../common-ui/ui-avatar/ui-avatar.component';
 
 @Component({
   selector: 'page-profile',
@@ -17,9 +17,9 @@ import { UiPostFeedComponent } from '../../common-ui/ui-post-feed/ui-post-feed.c
     CommonModule, 
     UiSvgComponent, 
     RouterModule, 
-    ImgUrlPipe, 
     UiTagComponent, 
-    UiPostFeedComponent
+    UiPostFeedComponent,
+    UiAvatarComponent
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'

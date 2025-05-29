@@ -1,0 +1,55 @@
+@use "../../../typography.scss" as *;
+
+:host {
+	background-color: var(--dark-color);
+	border: 1px solid var(--light-color);
+	padding: 20px;
+	display: grid;
+	grid-template-columns: 32px 1fr;
+	grid-gap: 16px;
+}
+
+.ui-post {
+	&__content {
+		display: grid;
+		grid-gap: 12px;
+	}
+
+	&__author {
+		@include text-regular-1;
+	}
+
+	&__created-at {
+		color: var(--light-transparent-color);
+		@include text-medium;
+	}
+
+    &__text {
+        margin-bottom: 8px;
+		@include text-medium;
+	}
+
+    &__counters {
+        margin-bottom: 16px;
+        display: flex;
+        gap: 6px;
+        align-items: center;
+        color: var(--primary-color);
+    }
+
+    &__count {
+        @include button-1;
+    }
+
+    &__svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    &__comments {
+	    max-height: 150px;
+        overflow-y: auto;
+        display: grid;
+        grid-gap: 8px;
+    }
+}
