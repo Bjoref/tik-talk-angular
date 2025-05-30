@@ -42,3 +42,10 @@ export interface CommentCreateDto {
   authorId: number;
   postId: number;
 }
+
+export interface EmitPostData {
+	postText: string,
+	isCommentInput: boolean,
+	profile: Profile,
+	postId: number,
+}

@@ -1,6 +1,9 @@
 @use '../../../typography.scss' as *;
-
 .settings {
+    &__section {
+        padding: 24px;
+    }
+
     &__form {
         display: flex;
         flex-direction: column;
@@ -30,6 +33,12 @@
                 color: var(--light-transparent-color);
                 @include text-medium;
             }
+        }
+
+        &-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         &-input {

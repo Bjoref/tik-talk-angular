@@ -4,6 +4,7 @@ import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ProfileHttpService } from '../../data/services/profile-http.service';
 import { firstValueFrom } from 'rxjs';
 import { UiAvatarUploadComponent } from '../../common-ui/ui-avatar-upload/ui-avatar-upload.component';
+import { AuthHttpService } from '../../data/services/auth-http.service';
 
 @Component({
   selector: 'settings',
@@ -15,6 +16,7 @@ export class SettingsComponent {
   @ViewChild(UiAvatarUploadComponent) uiAvatar!: UiAvatarUploadComponent
 
   profileService = inject(ProfileHttpService);
+  authHttpService = inject(AuthHttpService);
   
   fb = inject(FormBuilder);
 
@@ -57,6 +59,10 @@ export class SettingsComponent {
     if(!stack) return '';
 
     return stack;
+  }
+
+  logout() {
+    this.authHttpService.logout()
   }
 
 }

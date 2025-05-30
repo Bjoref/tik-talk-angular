@@ -9,8 +9,10 @@ import {
 import { UiPostInputComponent } from '../ui-post-input/ui-post-input.component';
 import { UiPostComponent } from '../ui-post/ui-post.component';
 import { PostHttpService } from '../../data/services/post-http.service';
-import { Post } from '../../data/interfaces/post.interface';
-import { firstValueFrom } from 'rxjs';
+import { EmitPostData, Post } from '../../data/interfaces/post.interface';
+import { debounceTime, firstValueFrom, Subject, takeUntil } from 'rxjs';
+import { PostService } from '../../data/services/post.service';
+import { Profile } from '../../data/interfaces/profile.interface';
 
 @Component({
 	selector: 'ui-post-feed',
@@ -19,34 +21,53 @@ import { firstValueFrom } from 'rxjs';
 	styleUrl: './ui-post-feed.component.scss',
 })
 export class UiPostFeedComponent {
-	postService = inject(PostHttpService);
+	private destroy$ = new Subject<void>();
+
+	postHttpService = inject(PostHttpService);
+	postService = inject(PostService);
 	r2 = inject(Renderer2);
 	hostElement = inject(ElementRef);
 
-	posts: Signal<Post[]> = this.postService.posts;
+	private resizeSubject = new Subject<Event>();
 
-	@HostListener('window:resize')
-	OnWindowResize() {
-    this.resizeFeed();
-  }
+	posts: Signal<Post[]> = this.postHttpService.posts;
 
 	constructor() {
-		firstValueFrom(this.postService.fetchPost());
+		firstValueFrom(this.postHttpService.fetchPost());
 	}
 
 	ngAfterViewInit() {
-    this.resizeFeed();
+		this.postService.updateHeight(this.hostElement, this.r2);
+
+		this.resizeSubject
+			.pipe(debounceTime(100), takeUntil(this.destroy$))
+			.subscribe(() => {
+				this.postService.updateHeight(this.hostElement, this.r2);
+			});
 	}
 
-	resizeFeed() {
-		const { top } = this.hostElement.nativeElement.getBoundingClientRect();
+	onCreated(data: EmitPostData) {
+		this.postService
+			.onCreatePost(data.postText, data.isCommentInput, data.profile, data.postId)
+			.pipe(takeUntil(this.destroy$))
+			.subscribe({
+				next: (response) => {},
+				error: (err) => {
+					console.error('Ошибка:', err);
+				},
+				complete: () => {
+					console.log('complete');
+				},
+			});
+	}
 
-		const height = window.innerHeight - top - 24 - 24;
+	@HostListener('window:resize', ['$event'])
+	onResize(event: Event) {
+		this.resizeSubject.next(event);
+	}
 
-		this.r2.setStyle(
-			this.hostElement.nativeElement,
-			'height',
-			height + 'px'
-		);
+	ngOnDestroy() {
+		this.destroy$.next();
+		this.destroy$.complete();
 	}
 }

@@ -2,11 +2,15 @@
 
 .ui-comment {
 	margin-bottom: 16px;
+	padding-right: 24px;
 	display: grid;
 	grid-template-columns: 32px 1fr;
 	grid-gap: 16px;
 
 	&__header {
+		margin-bottom: 8px;
+		display: flex;
+		justify-content: space-between;
 		color: var(--light-transparent-color);
 		@include text-medium;
 	}

@@ -60,10 +60,18 @@ export class AuthHttpService extends HttpService {
 	}
 
 	logout() {
-		this.cookieService.deleteAll();
-		this.token = null;
-		this.refreshToken = null;
-		this.router.navigate(['/login']);
+		return this.http
+			.post<any>(`${this.baseApiUrl}${this.direction}logout`, {})
+			.subscribe(
+				() => {},
+				() => {},
+				() => {
+					this.cookieService.deleteAll();
+					this.token = null;
+					this.refreshToken = null;
+					this.router.navigate(['/login']);
+				}
+			);
 	}
 
 	saveToken(val: AuthToken) {

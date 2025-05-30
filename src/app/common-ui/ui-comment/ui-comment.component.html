@@ -5,7 +5,7 @@
             <div class="ui-comment__header">
                 <span> {{ comment.author.username }}</span>
                 <span class="ui-comment__created-at">
-                    {{ comment.createdAt | date: 'HH:mm dd.MM.YY'}}
+                    {{ comment.createdAt | dateConverter }}
                 </span>
             </div>
             
