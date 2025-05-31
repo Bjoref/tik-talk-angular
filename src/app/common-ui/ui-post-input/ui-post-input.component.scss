@@ -1,7 +1,9 @@
+@use '../../../indents.scss' as *; 
+
 :host { 
     display: grid;
-    padding: 16px;
-    grid-template-columns: 32px 1fr 44px;
+    padding: $indent-m;
+    grid-template-columns: $indent-xl 1fr 44px;
     grid-gap: 12px;
     align-items: center;
     background-color: var(--dark-color);
@@ -9,7 +11,7 @@
 
     &.comment {
         border: 1px dashed var(--light-color);
-        border-radius: 4px;
+        border-radius: $indent-xs;
     }
 }
 
@@ -36,7 +38,7 @@
     }
     
     &__svg {
-        width: 16px;
-        height: 16px;  
+        width: $indent-m;
+        height: $indent-m;  
     }
 }

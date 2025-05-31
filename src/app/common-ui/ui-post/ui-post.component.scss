@@ -1,12 +1,13 @@
 @use "../../../typography.scss" as *;
+@use '../../../indents.scss' as *;
 
 :host {
 	background-color: var(--dark-color);
 	border: 1px solid var(--light-color);
 	padding: 20px;
 	display: grid;
-	grid-template-columns: 32px 1fr;
-	grid-gap: 16px;
+	grid-template-columns: $indent-xl 1fr;
+	grid-gap: $indent-m;
 }
 
 .ui-post {
@@ -25,12 +26,12 @@
 	}
 
     &__text {
-        margin-bottom: 8px;
+        margin-bottom: $indent-s;
 		@include text-medium;
 	}
 
     &__counters {
-        margin-bottom: 16px;
+        margin-bottom: $indent-m;
         display: flex;
         gap: 6px;
         align-items: center;
@@ -42,14 +43,14 @@
     }
 
     &__svg {
-        width: 16px;
-        height: 16px;
+        width: $indent-m;
+        height: $indent-m;
     }
 
     &__comments {
 	    max-height: 150px;
         overflow-y: auto;
         display: grid;
-        grid-gap: 8px;
+        grid-gap: $indent-s;
     }
 }

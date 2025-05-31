@@ -1,15 +1,17 @@
 @use '../../../typography.scss' as *;
+@use '../../../indents.scss' as *;
+
 .settings {
     &__section {
-        padding: 24px;
+        padding: $indent-l;
     }
 
     &__form {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        padding: 32px;
-        height: calc(100dvh - (24px * 4));
+        padding: $indent-xl;
+        height: calc(100dvh - ($indent-l * 4));
         background: var(--dark-color);
         border: 1px solid var(--light-color);
 
@@ -27,7 +29,7 @@
         &-label {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: $indent-m;
             
             &-text {
                 color: var(--light-transparent-color);

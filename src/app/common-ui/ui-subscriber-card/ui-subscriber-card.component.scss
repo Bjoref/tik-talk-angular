@@ -1,10 +1,11 @@
 @use '../../../typography.scss' as *;
+@use '../../../indents.scss' as *;
 
 :host {
     display: grid;
-    grid-template-columns: 32px 1fr;
+    grid-template-columns: $indent-xl 1fr;
     grid-gap: 12px;
-    padding: 8px 0;
+    padding: $indent-s 0;
     align-items: center;
     @include button-2;
 }
@@ -12,8 +13,8 @@
 .ui-subscriber {
 
     &__img {
-        width: 32px;
-        height: 32px;
+        width: $indent-xl;
+        height: $indent-xl;
         border-radius: 50%;
     }
 }

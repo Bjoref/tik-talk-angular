@@ -1,10 +1,11 @@
 @use '../../../typography.scss' as *;
+@use '../../../indents.scss' as *;
 
 :host {
     display: grid;
     grid-template-columns: 112px 1fr;
     align-items: center;
-    gap: 24px;
+    gap: $indent-l;
 }
 
 .ui-profile-header {

@@ -1,9 +1,10 @@
 @use '../../../typography.scss' as *;
+@use '../../../indents.scss' as *;
 
 .profile {
-    padding: 24px;
+    padding: $indent-l;
     &__header {
-        margin-bottom: 24px;
+        margin-bottom: $indent-l;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -16,19 +17,19 @@
         }
 
         &-svg {
-            width: 16px;
-            height: 16px;
+            width: $indent-m;
+            height: $indent-m;
         }
     }
 
     &__main {
         display: grid;
         grid-gap: 64px;
-        padding: 24px;
+        padding: $indent-l;
         grid-template-columns: 1fr 350px;
 
         &-title {
-            margin-bottom: 16px;
+            margin-bottom: $indent-m;
             @include heading-6
         }
 
@@ -42,7 +43,7 @@
             display: flex;
             align-items: center;
             gap: 6px;
-            margin-bottom: 32px;
+            margin-bottom: $indent-xl;
         }
 
         &-link {
@@ -57,7 +58,7 @@
                 content: '';
                 position: absolute;
                 width: 1px;
-                height: 8px;
+                height: $indent-s;
                 top: 50%;
                 left: 50%;
                 background: var(--dark-color);
@@ -73,10 +74,10 @@
         }
 
         &-tags {
-            margin-bottom: 32px;
+            margin-bottom: $indent-xl;
             display: flex;
             flex-wrap: wrap;
-            gap: 4px;
+            gap: $indent-xs;
             max-height: fit-content;
         }
 

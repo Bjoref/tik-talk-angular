@@ -1,32 +1,41 @@
+@use "../../../indents.scss" as *;
+
 .ui-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
 
-    &_with-icon {
-     justify-content: space-between;
-    }
+	&_with-icon {
+		justify-content: space-between;
+	}
 
-    &__svg {
-        width: 16px;
-        height: 16px;
-    }
+	&__svg {
+		width: $indent-m;
+		height: $indent-m;
+	}
 
+	&_shadow {
+		position: relative;
 
-    &_shadow {
-        position: relative;
+		&::before {
+			content: "";
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			z-index: -1;
+			bottom: -$indent-xs;
+			right: -$indent-xs;
+			background: var(--grey-color);
+			border-radius: $indent-xs;
+		}
 
-        &::before {
-            content: '';
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            z-index: -1;
-            bottom: -4px;
-            right: -4px;
-            background: var(--grey-color);
-            border-radius: 4px;
-        }
-    }
+		&:hover,
+		&:focus-visible,
+		&:active {
+			&::before {
+				background: var(--primary-color);
+			}
+		}
+	}
 }

@@ -1,14 +1,15 @@
 @use "../../../typography.scss" as *;
+@use '../../../indents.scss' as *;
 
 .ui-comment {
-	margin-bottom: 16px;
-	padding-right: 24px;
+	margin-bottom: $indent-m;
+	padding-right: $indent-l;
 	display: grid;
-	grid-template-columns: 32px 1fr;
-	grid-gap: 16px;
+	grid-template-columns: $indent-xl 1fr;
+	grid-gap: $indent-m;
 
 	&__header {
-		margin-bottom: 8px;
+		margin-bottom: $indent-s;
 		display: flex;
 		justify-content: space-between;
 		color: var(--light-transparent-color);

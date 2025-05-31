@@ -1,37 +1,61 @@
-@use './reset.scss';
-@use './fonts.scss';
-@use './typography.scss' as *;
+@use "./reset.scss";
+@use "./fonts.scss";
+@use "./typography.scss" as *;
+@use "./indents.scss" as *;
 
 :root {
-    --dark-color: #000000;
-    --light-color: #FFFFFF;
-    --primary-color: #AE7AFF;
-    --grey-color: #5F646D;
-    --dark-hover-color: #161616;
-    --light-transparent-color: rgba(255, 255, 255, .75);
+	--dark-color: #000000;
+	--light-color: #ffffff;
+	--primary-color: #ae7aff;
+	--grey-color: #5f646d;
+	--dark-hover-color: #161616;
+	--light-transparent-color: rgba(255, 255, 255, 0.75);
+	--error-color: #ff4d4d;
 
-    --font-stack: 'JetBrainsMono', sans-serif
+	--font-stack: "JetBrainsMono", sans-serif;
 }
 
-html, body {
-    height: 100%;
+html,
+body {
+	height: 100%;
 }
 
 body {
-    color: var(--light-color);
-    font-family: var(--font-stack);
-    background-image: url(/assets/img/bg.jpg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-color: var(--dark-hover-color);
+	color: var(--light-color);
+	font-family: var(--font-stack);
+	background-image: url(/assets/img/bg.jpg);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-color: var(--dark-hover-color);
 }
 
 .btn {
-    padding: 10px 20px;
-    background: var(--primary-color);
-    color: var(--dark-color);
-    border: 1px solid var(--dark-color);
-    border-radius: 4px;
-    @include button-2;
+	padding: 10px 20px;
+	background: var(--primary-color);
+	color: var(--dark-color);
+	border: 1px solid var(--dark-color);
+	border-radius: $indent-xs;
+	@include button-2;
+	-webkit-transition: background-color 0.2s ease-in-out,
+		color 0.2s ease-in-out;
+	-moz-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+	-o-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+	transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+
+	&::before {
+		-webkit-transition: background-color 0.2s ease-in-out,
+			color 0.2s ease-in-out;
+		-moz-transition: background-color 0.2s ease-in-out,
+			color 0.2s ease-in-out;
+		-o-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+	}
+
+	&:hover,
+	&:focus-visible,
+	&:active {
+		background: var(--dark-color);
+		color: var(--light-color);
+	}
 }
