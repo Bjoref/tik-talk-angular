@@ -4,7 +4,7 @@ import { Chat, LastMessageRes } from '../../data/interfaces/chat.interface';
 import { DateConverterPipe } from '../../helpers/pipes/date-converter.pipe';
 
 @Component({
-  selector: 'ui-chats-button',
+  selector: 'button[chats]',
   imports: [UiAvatarComponent, DateConverterPipe],
   templateUrl: './ui-chats-button.component.html',
   styleUrl: './ui-chats-button.component.scss'

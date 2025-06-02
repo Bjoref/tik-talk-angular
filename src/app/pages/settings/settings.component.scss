@@ -29,7 +29,7 @@
             
             &-text {
                 color: var(--light-transparent-color);
-                @include text-medium;
+                @include text-medium-1;
             }
         }
 
@@ -44,7 +44,7 @@
             border: none;
             border-bottom: var(--light-border);
             background: none;
-            @include text-regular-1;
+            @include text-regular-2;
 
             &:focus-visible {
                 outline: 1px solid var(--primary-color);
@@ -57,7 +57,7 @@
             border: none;
             border-bottom: var(--light-border);
             resize: none;
-            @include text-regular-1;
+            @include text-regular-2;
         }
     }
 

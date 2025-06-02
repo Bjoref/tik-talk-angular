@@ -9,6 +9,7 @@
 	--primary-color: #ae7aff;
 	--grey-color: #5f646d;
 	--dark-hover-color: #161616;
+	--dark-message-color: #404040;
 	--light-transparent-color: rgba(255, 255, 255, 0.75);
 	--light-border: 1px solid var(--light-color);
 	--error-color: #ff4d4d;
@@ -61,8 +62,32 @@ body {
 	}
 }
 
-
 section {
-    margin: $indent-l;
-    padding: $indent-l;
+	margin: $indent-l;
+	padding: $indent-l;
+}
+
+.common {
+	&__label {
+		display: flex;
+		flex-direction: column;
+		gap: $indent-m;
+
+		&-text {
+			color: var(--light-transparent-color);
+			@include text-medium-1;
+		}
+	}
+
+	&__input {
+		height: 33px;
+		border: none;
+		border-bottom: var(--light-border);
+		background: none;
+		@include text-regular-2;
+
+		&:focus-visible {
+			outline: 1px solid var(--primary-color);
+		}
+	}
 }

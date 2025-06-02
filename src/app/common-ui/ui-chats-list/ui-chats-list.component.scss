@@ -6,6 +6,7 @@
 }
 .ui-chats-list {
     &__input-wrapper {
+        height: 76px;
         padding: $indent-m 20px;
         border-bottom: var(--light-border);
     }

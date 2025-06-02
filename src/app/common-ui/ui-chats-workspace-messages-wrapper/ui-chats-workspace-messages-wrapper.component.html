@@ -1,1 +1,9 @@
-<ui-chats-workspace-message></ui-chats-workspace-message>
+<div class="ui-chats-workspace-messages-wrapper">
+	@for(message of messages(); track message.id) {
+	    <ui-chats-workspace-message
+		    [message]="message"
+	    ></ui-chats-workspace-message>
+	}
+</div>
+
+<ui-post-input (createMessage)="onSendMessage($event)"></ui-post-input>

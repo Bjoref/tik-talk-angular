@@ -1,1 +1,6 @@
-<p>ui-chats-workspace-header works!</p>
+@if(profile(); as profile) {
+    <div class="ui-chats-workspace-header">
+        <ui-avatar [avatarUrl]="profile.avatarUrl"></ui-avatar>
+        <div>{{ profile.firstName }} {{ profile.lastName }}</div>
+    </div>
+}

@@ -55,7 +55,7 @@
 
     &__title {
         margin-bottom: 20px;
-        @include text-medium;
+        @include text-medium-1;
     }
 
     &__subscribers {
@@ -71,7 +71,7 @@
 
         &-link {
             color: var(--primary-color);
-            @include text-medium;
+            @include text-medium-1;
         }
 
         &-svg {

@@ -13,10 +13,10 @@
 		display: flex;
 		justify-content: space-between;
 		color: var(--light-transparent-color);
-		@include text-medium;
+		@include text-medium-1;
 	}
 
 	&__text {
-		@include text-medium;
+		@include text-medium-1;
 	}
 }

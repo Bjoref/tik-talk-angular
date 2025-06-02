@@ -1,1 +1,16 @@
-<p>ui-chats-workspace-message works!</p>
+@if(message(); as message) {
+    <ui-avatar [avatarUrl]="message.user ? message.user.avatarUrl : null"></ui-avatar>
+
+    <div class="ui-chats-workspace-message__container">
+        <strong class="ui-chats-workspace-message__message">
+            <a class="ui-chats-workspace-message__link">{{ message.user?.firstName }} {{ message.user?.lastName }}</a>
+            <span class="ui-chats-workspace-message__time">
+                {{ message.createdAt | date: 'HH:mm' }}
+            </span>
+        </strong>
+
+        <div class="ui-chats-workspace-message__text">
+            {{ message.text }}
+        </div>
+    </div>
+}

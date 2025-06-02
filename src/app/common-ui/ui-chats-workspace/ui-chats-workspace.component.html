@@ -1,4 +1,4 @@
-<ui-chats-workspace-header></ui-chats-workspace-header>
-<ui-chats-workspace-messages-wrapper></ui-chats-workspace-messages-wrapper>
-
-<ui-post-input></ui-post-input>
+@if (activeChat$ | async; as chat) {
+    <ui-chats-workspace-header [profile]="chat.companion"></ui-chats-workspace-header>
+    <ui-chats-workspace-messages-wrapper [chat]="chat"></ui-chats-workspace-messages-wrapper>
+}

@@ -1,15 +1,15 @@
 <div class="ui-chats-list__input-wrapper">
-	<label class="ui-chats-list__form-label">
-		<span class="ui-chats-list__form-label-text">Фамилия</span>
-
+	<label class="ui-chats-list__form-label common__label">
 		<input
 			type="text"
-			class="ui-chats-list__form-input"
+			class="ui-chats-list__form-input common__input"
+			placeholder="Искать..."
+			[formControl]="filterChatsControl"
 		/>
 	</label>
 </div>
 
 @for (chat of chats$ | async; track chat.id) {
-	<ui-chats-button [chat]="chat"></ui-chats-button>
+	<button chats [chat]="chat" [routerLink]="[chat.id]" routerLinkActive="active"></button>
 }
 

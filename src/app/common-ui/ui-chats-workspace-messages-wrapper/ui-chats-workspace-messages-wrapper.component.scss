@@ -1,0 +1,12 @@
+@use "../../../indents.scss" as *;
+
+:host {
+    display: grid;
+    padding: $indent-m 20px;
+    grid-template-rows: 1fr min-content;
+}
+
+.ui-chats-workspace-messages-wrapper {
+    display: grid;
+    grid-gap: 12px;
+}

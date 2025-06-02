@@ -27,6 +27,7 @@ export class UiPostInputComponent {
 	private destroy$ = new Subject<void>();
 
 	isCommentInput = input<boolean>(false);
+	isMessageInput = input<boolean>(false);
 	postId = input<number>(0);
 
 	postService = inject(PostService);
@@ -43,6 +44,7 @@ export class UiPostInputComponent {
 	}
 
 	@Output() create = new EventEmitter();
+	@Output() createMessage = new EventEmitter<string>();
 
 	onTextAreaInput(event: Event) {
 		const textarea = event.target as HTMLTextAreaElement;
@@ -52,14 +54,18 @@ export class UiPostInputComponent {
 	}
 
 	onCreatePost() {
-		const data: EmitPostData = {
-			postText: this.postText,
-			isCommentInput: this.isCommentInput(),
-			profile: this.profile()!,
-			postId: this.postId(),
-		};
-
-		this.create.emit(data);
+		if(!this.isMessageInput) {
+			const data: EmitPostData = {
+				postText: this.postText,
+				isCommentInput: this.isCommentInput(),
+				profile: this.profile()!,
+				postId: this.postId(),
+			};
+	
+			this.create.emit(data);
+		} else {
+			this.createMessage.emit(this.postText);
+		}
 
 		this.postText = '';
 	}

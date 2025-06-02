@@ -62,9 +62,17 @@
 }
 
 @mixin text-regular-1 {
+    @include text-typography(12px, 16px);
+}
+
+@mixin text-regular-2 {
     @include text-typography(14px, 21px);
 }
 
-@mixin text-medium {
+@mixin text-medium-1 {
     @include text-typography(12px, 16px, 500);
+}
+
+@mixin text-medium-2 {
+    @include text-typography(14px, 21px, 500);
 }
