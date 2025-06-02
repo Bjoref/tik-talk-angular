@@ -5,7 +5,7 @@
         display: inline-flex;
         padding: $indent-xs $indent-s;
         border-radius: $indent-xs;
-        border: 1px solid var(--light-color);
+        border: var(--light-border);
         font-size: 12px;
         font-weight: 700;
     }

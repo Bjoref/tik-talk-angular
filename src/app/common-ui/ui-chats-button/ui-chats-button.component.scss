@@ -1,0 +1,23 @@
+@use "../../../indents.scss" as *;
+@use "../../../typography.scss" as *;
+
+:host {
+	padding: $indent-l 20px;
+	display: grid;
+	align-items: center;
+	grid-template-columns: $indent-xl 1fr;
+	gap: $indent-m;
+	border-bottom: var(--light-border);
+}
+
+.ui-chats-button {
+    &__last-message {
+        &-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            @include text-medium;
+            color: var(--light-transparent-color);
+        }
+    }
+}

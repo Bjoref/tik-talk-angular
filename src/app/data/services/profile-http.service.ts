@@ -9,20 +9,20 @@ import { Pageable } from '../interfaces/pageable.interface';
 	providedIn: 'root',
 })
 export class ProfileHttpService extends HttpService {
-	private direction: string = 'account/';
+	private direction: string = `${this.baseApiUrl}account/`;
 
 	me = signal<Profile | null>(null);
 	filteredProfiles = signal<Profile[]>([]);
 
 	getTestsAccounts(): Observable<Profile[]> {
 		return this.http.get<Profile[]>(
-			`${this.baseApiUrl}${this.direction}test_accounts`
+			`${this.direction}test_accounts`
 		);
 	}
 
 	getMe(): Observable<Profile> {
 		return this.http
-			.get<Profile>(`${this.baseApiUrl}${this.direction}me`)
+			.get<Profile>(`${this.direction}me`)
 			.pipe(
 				tap((val) => {
 					this.me.set(val);
@@ -33,20 +33,20 @@ export class ProfileHttpService extends HttpService {
 	getSubscribersShortList(amount: number = 3) {
 		return this.http
 			.get<Pageable<Profile>>(
-				`${this.baseApiUrl}${this.direction}subscribers/`
+				`${this.direction}subscribers/`
 			)
 			.pipe(map((res) => res.items.slice(0, amount)));
 	}
 
 	getAccount(id: string | number) {
 		return this.http.get<Profile>(
-			`${this.baseApiUrl}${this.direction}${id}`
+			`${this.direction}${id}`
 		);
 	}
 
 	patchProfile(profile: Partial<Profile>) {
 		return this.http.patch<Profile>(
-			`${this.baseApiUrl}${this.direction}me`,
+			`${this.direction}me`,
 			profile
 		);
 	}
@@ -56,7 +56,7 @@ export class ProfileHttpService extends HttpService {
 		fd.append('image', file);
 
 		return this.http.post(
-			`${this.baseApiUrl}${this.direction}upload_image`,
+			`${this.direction}upload_image`,
 			fd
 		);
 	}
@@ -64,7 +64,7 @@ export class ProfileHttpService extends HttpService {
 	filterProfiles(params: Record<string, any>) {
 		return this.http
 			.get<Pageable<Profile>>(
-				`${this.baseApiUrl}${this.direction}accounts`,
+				`${this.direction}accounts`,
 				{ params }
 			)
 			.pipe(tap((res) => this.filteredProfiles.set(res.items)));

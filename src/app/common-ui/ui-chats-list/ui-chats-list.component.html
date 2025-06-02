@@ -1,0 +1,15 @@
+<div class="ui-chats-list__input-wrapper">
+	<label class="ui-chats-list__form-label">
+		<span class="ui-chats-list__form-label-text">Фамилия</span>
+
+		<input
+			type="text"
+			class="ui-chats-list__form-input"
+		/>
+	</label>
+</div>
+
+@for (chat of chats$ | async; track chat.id) {
+	<ui-chats-button [chat]="chat"></ui-chats-button>
+}
+

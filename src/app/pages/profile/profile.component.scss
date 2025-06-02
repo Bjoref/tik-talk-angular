@@ -2,7 +2,6 @@
 @use '../../../indents.scss' as *;
 
 .profile {
-    padding: $indent-l;
     &__header {
         margin-bottom: $indent-l;
         display: flex;

@@ -8,7 +8,7 @@
         justify-content: space-between;
         padding: $indent-xl;
         background: var(--dark-color);
-        border: 1px solid var(--light-color);
+        border: var(--light-border);
 
         &-content {
             display: grid;
@@ -35,7 +35,7 @@
         &-input {
             height: 33px;
             border: none;
-            border-bottom: 1px solid var(--light-color);
+            border-bottom: var(--light-border);
             background: none;
             @include text-regular-1;
 
@@ -48,7 +48,7 @@
         &-textarea {
             height: 84px;
             border: none;
-            border-bottom: 1px solid var(--light-color);
+            border-bottom: var(--light-border);
             resize: none;
             @include text-regular-1;
         }

@@ -1,0 +1,18 @@
+@if (chat(); as chat) {
+<ui-avatar [avatarUrl]="chat.userFrom.avatarUrl"></ui-avatar>
+
+<div class="ui-chats-button__last-message">
+    <div class="ui-chats-button__last-message-header">
+        <div>
+            {{ chat.userFrom.firstName }}
+            {{ chat.userFrom.lastName }}
+        </div>
+
+        {{ chat.createdAt | dateConverter }}
+    </div>
+	<p class="ui-chats-button__last-message-text">
+		{{ chat.message ?? "Сообщений нет" }}
+	</p>
+</div>
+
+}

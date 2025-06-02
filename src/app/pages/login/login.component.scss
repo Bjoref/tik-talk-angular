@@ -40,7 +40,7 @@
         width: 100%;
         background: var(--dark-color);
         padding: 12px 50px 12px 20px;
-        border: 1px solid var(--light-color);
+        border: var(--light-border);
         border-radius: $indent-xs;
 
         &.error {

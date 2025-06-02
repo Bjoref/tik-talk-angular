@@ -9,7 +9,7 @@ import { AuthToken } from '../interfaces/auth.interface';
 	providedIn: 'root',
 })
 export class AuthHttpService extends HttpService {
-	private direction: string = 'auth/';
+	private direction: string = `${this.baseApiUrl}auth/`;
 
 	public token: string | null = null;
 	public refreshToken: string | null = null;
@@ -35,7 +35,7 @@ export class AuthHttpService extends HttpService {
 		fd.append('password', payload.password);
 
 		return this.http
-			.post<AuthToken>(`${this.baseApiUrl}${this.direction}token`, fd)
+			.post<AuthToken>(`${this.direction}token`, fd)
 			.pipe(
 				tap((val) => {
 					this.saveToken(val);
@@ -45,7 +45,7 @@ export class AuthHttpService extends HttpService {
 
 	refreshAuthToken() {
 		return this.http
-			.post<AuthToken>(`${this.baseApiUrl}${this.direction}refresh`, {
+			.post<AuthToken>(`${this.direction}refresh`, {
 				refresh_token: this.refreshToken,
 			})
 			.pipe(
@@ -61,7 +61,7 @@ export class AuthHttpService extends HttpService {
 
 	logout() {
 		return this.http
-			.post<any>(`${this.baseApiUrl}${this.direction}logout`, {})
+			.post<any>(`${this.direction}logout`, {})
 			.subscribe(
 				() => {},
 				() => {},

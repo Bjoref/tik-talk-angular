@@ -10,6 +10,7 @@
 	--grey-color: #5f646d;
 	--dark-hover-color: #161616;
 	--light-transparent-color: rgba(255, 255, 255, 0.75);
+	--light-border: 1px solid var(--light-color);
 	--error-color: #ff4d4d;
 
 	--font-stack: "JetBrainsMono", sans-serif;
@@ -58,4 +59,10 @@ body {
 		background: var(--dark-color);
 		color: var(--light-color);
 	}
+}
+
+
+section {
+    margin: $indent-l;
+    padding: $indent-l;
 }

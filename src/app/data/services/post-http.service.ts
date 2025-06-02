@@ -7,13 +7,13 @@ import { map, Observable, switchMap, tap } from 'rxjs';
 	providedIn: 'root',
 })
 export class PostHttpService extends HttpService {
-	private direction: string = 'post/';
+	private direction: string = `${this.baseApiUrl}post/`;
 
 	posts = signal<Post[]>([]);
 
 	createPost(payload: PostCreateDto) {
 		return this.http
-			.post<Post>(`${this.baseApiUrl}${this.direction}`, payload)
+			.post<Post>(`${this.direction}`, payload)
 			.pipe(
 				switchMap(() => {
 					return this.fetchPost();
@@ -23,13 +23,13 @@ export class PostHttpService extends HttpService {
 
 	fetchPost() {
 		return this.http
-			.get<Post[]>(`${this.baseApiUrl}${this.direction}`)
+			.get<Post[]>(`${this.direction}`)
 			.pipe(tap((res) => this.posts.set(res)));
 	}
 
 	getCommentByPostId(postId: number):Observable<PostComment[]> {
 		return this.http
-      .get<{ comments: PostComment[] }>(`${this.baseApiUrl}${this.direction}${postId}`)
+      .get<{ comments: PostComment[] }>(`${this.direction}${postId}`)
       .pipe(
         map((response) => response.comments)
       );

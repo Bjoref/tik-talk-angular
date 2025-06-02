@@ -6,7 +6,7 @@
     grid-gap: $indent-xl;
     grid-template-columns: 123px 1fr;
     padding-bottom: $indent-m;
-    border-bottom: 1px solid var(--light-color);
+    border-bottom: var(--light-border);
 }
 
 .ui-avatar-upload {

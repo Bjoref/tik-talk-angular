@@ -2,7 +2,7 @@
 
 .profile {
     &-card {
-        border: 1px solid var(--light-color);
+        border: var(--light-border);
         padding: $indent-xl $indent-l;
         display: grid;
         grid-template-columns:  minmax(20px, 22%) minmax(20px, 27%) minmax(200px, 19%) minmax(200px, 22%);

@@ -1,13 +1,21 @@
-<section class="profile">
+<section>
     @if(profile$ | async; as profile) {
         <header class="profile__header">
             <ui-profile-header [profile]="profile"></ui-profile-header>
 
-            <a class="profile__header-link btn" [routerLink]="['/settings']">
-                Редактировать
-
-                <svg icon="settings" class="profile__header-svg"></svg>
-            </a>
+            @if(isMyPage()) {
+                <a class="profile__header-link btn" [routerLink]="['/settings']">
+                    Редактировать
+    
+                    <svg icon="settings" class="profile__header-svg"></svg>
+                </a>
+            } @else {
+                <button class="profile__header-link btn" (click)="sendMessage(profile.id)">
+                    Написать
+    
+                    <svg icon="right-arrow" class="profile__header-svg"></svg>
+                </button>
+            }
         </header>
 
         <main class="profile__main">
