@@ -2,8 +2,8 @@
 	@for(message of messages(); track message.id) {
 	    <ui-chats-workspace-message
 		    [message]="message"
+			[id]="$index === messages().length - 1 ? 'lastMessage' : ''" 
 	    ></ui-chats-workspace-message>
 	}
 </div>
 
-<ui-post-input (createMessage)="onSendMessage($event)"></ui-post-input>

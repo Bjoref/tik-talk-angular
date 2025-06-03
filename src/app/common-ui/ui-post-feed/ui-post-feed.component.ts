@@ -37,12 +37,12 @@ export class UiPostFeedComponent {
 	}
 
 	ngAfterViewInit() {
-		this.postService.updateHeight(this.hostElement, this.r2);
+		this.postService.updateHeight(this.hostElement, this.r2, 48);
 
 		this.resizeSubject
 			.pipe(debounceTime(100), takeUntil(this.destroy$))
 			.subscribe(() => {
-				this.postService.updateHeight(this.hostElement, this.r2);
+				this.postService.updateHeight(this.hostElement, this.r2, 48);
 			});
 	}
 

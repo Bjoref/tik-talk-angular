@@ -8,13 +8,12 @@ registerLocaleData(localeRu);
 	name: 'dateConverter',
 })
 export class DateConverterPipe implements PipeTransform {
-	transform(value: string | null): string | null {
+	transform(value: string | null, format: string = 'dd.MM.yyyy'): string | null {
 		if (!value) return null;
 
 		const utcDate = new Date(value.endsWith('Z') ? value : value + 'Z');
 		if (isNaN(utcDate.getTime())) return value;
 
-		const format = 'dd.MM.yyyy';
 		const locale = 'ru-RU';
 
 		const currentDate = new Date();

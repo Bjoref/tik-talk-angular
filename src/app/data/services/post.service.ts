@@ -13,9 +13,9 @@ export class PostService {
 		private commentService: CommentHttpService,
 		private postHttpService: PostHttpService
 	) {}
-	public updateHeight(hostElement: ElementRef, renderer: Renderer2) {
+	public updateHeight(hostElement: ElementRef, renderer: Renderer2, numbers:number) {
 		const { top } = hostElement.nativeElement.getBoundingClientRect();
-		const height = window.innerHeight - top - 24 - 24;
+		const height = window.innerHeight - top - numbers;
 
 		renderer.setStyle(hostElement.nativeElement, 'height', height + 'px');
 	}

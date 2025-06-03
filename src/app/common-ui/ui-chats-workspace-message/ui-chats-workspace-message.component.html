@@ -3,10 +3,7 @@
 
     <div class="ui-chats-workspace-message__container">
         <strong class="ui-chats-workspace-message__message">
-            <a class="ui-chats-workspace-message__link">{{ message.user?.firstName }} {{ message.user?.lastName }}</a>
-            <span class="ui-chats-workspace-message__time">
-                {{ message.createdAt | date: 'HH:mm' }}
-            </span>
+            <a class="ui-chats-workspace-message__link">{{ message.user?.firstName }}&nbsp;{{ message.user?.lastName }}</a>&nbsp;<span class="ui-chats-workspace-message__time">{{ message.createdAt | dateConverter: 'HH:mm' }}</span>
         </strong>
 
         <div class="ui-chats-workspace-message__text">

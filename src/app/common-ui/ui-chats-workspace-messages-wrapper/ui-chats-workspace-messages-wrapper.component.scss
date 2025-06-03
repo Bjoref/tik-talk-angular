@@ -3,10 +3,13 @@
 :host {
     display: grid;
     padding: $indent-m 20px;
+    height: 100%;
+    overflow-y: auto;
     grid-template-rows: 1fr min-content;
 }
 
 .ui-chats-workspace-messages-wrapper {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     grid-gap: 12px;
 }

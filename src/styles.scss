@@ -19,7 +19,7 @@
 
 html,
 body {
-	height: 100%;
+	height: 100vh;
 }
 
 body {
@@ -62,7 +62,8 @@ body {
 	}
 }
 
-section {
+section,
+.section {
 	margin: $indent-l;
 	padding: $indent-l;
 }
