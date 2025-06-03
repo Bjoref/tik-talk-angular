@@ -32,6 +32,7 @@ export class UiChatsWorkspaceMessagesWrapperComponent {
 	hostElement = inject(ElementRef);
 
 	messages = this.chatService.activeChatessages;
+	messagesLength: number = 0;
 
 	private resizeSubject = new Subject<Event>();
 
@@ -54,12 +55,17 @@ export class UiChatsWorkspaceMessagesWrapperComponent {
 	}
 
 	private scrollToBottom(): void {
-		// requestAnimationFrame(() => {
-		// 	const element = this.hostElement.nativeElement;
-		// 	element.scrollTop = element.scrollHeight;
-		// });
-	}
+		if(this.messagesLength === this.messages().length) {
+			return
+		}
+		this.messagesLength = this.messages().length;
 
+
+		requestAnimationFrame(() => {
+			const element = this.hostElement.nativeElement;
+			element.scrollTop = element.scrollHeight;
+		});
+	}
 
 	@HostListener('window:resize', ['$event'])
 	onResize(event: Event) {
