@@ -27,13 +27,14 @@ export class ChatHttpService extends HttpService {
 	getChatById(chatId: number) {
 		return this.http.get<Chat>(`${this.directionChat}${chatId}`).pipe(
 			map((chat) => {
+				this.filterToCreateDate(chat.messages)
 				const patchedMessages = chat.messages.map((message) => {
 					return {
 						...message,
 						user:
-							chat.userFirst.id === message.userFromId
-								? chat.userFirst
-								: chat.userSecond,
+						chat.userFirst.id === message.userFromId
+						? chat.userFirst
+						: chat.userSecond,
 						isMine: message.userFromId === this.me()!.id,
 					};
 				});
@@ -48,6 +49,18 @@ export class ChatHttpService extends HttpService {
 				};
 			})
 		);
+	}
+
+	filterToCreateDate(a: Message[]) {
+		for (let i = 0; i < a.length - 1; i++) {
+			if(i === 0) {
+				a[i].isDate = true
+				a[i].isFirstMessage = true
+			}
+			if(new Date(a[i].createdAt).getDay() < new Date(a[i + 1].createdAt).getDay()) {
+				a[i].isDate = true
+			}
+		}
 	}
 
 	sendMessage(chatId: number, message: string) {

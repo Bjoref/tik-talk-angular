@@ -13,10 +13,11 @@ import { ChatHttpService } from '../../data/services/chat-http.service';
 import { Chat } from '../../data/interfaces/chat.interface';
 import { debounceTime, Subject, takeUntil } from 'rxjs';
 import { PostService } from '../../data/services/post.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
 	selector: 'ui-chats-workspace-messages-wrapper',
-	imports: [UiChatsWorkspaceMessageComponent],
+	imports: [UiChatsWorkspaceMessageComponent, CommonModule],
 	templateUrl: './ui-chats-workspace-messages-wrapper.component.html',
 	styleUrl: './ui-chats-workspace-messages-wrapper.component.scss',
 })
@@ -53,10 +54,10 @@ export class UiChatsWorkspaceMessagesWrapperComponent {
 	}
 
 	private scrollToBottom(): void {
-		requestAnimationFrame(() => {
-			const element = this.hostElement.nativeElement;
-			element.scrollTop = element.scrollHeight;
-		});
+		// requestAnimationFrame(() => {
+		// 	const element = this.hostElement.nativeElement;
+		// 	element.scrollTop = element.scrollHeight;
+		// });
 	}
 
 
