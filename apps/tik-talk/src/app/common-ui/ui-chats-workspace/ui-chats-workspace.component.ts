@@ -12,7 +12,7 @@ import {
 	Observable,
 } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { UiPostInputComponent } from '../ui-post-input/ui-post-input.component';
+import { UiPostInputComponent } from '@tt/posts';
 
 @Component({
 	selector: 'ui-chats-workspace',

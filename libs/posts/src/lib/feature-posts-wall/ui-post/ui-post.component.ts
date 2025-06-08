@@ -6,19 +6,16 @@ import {
 	Output,
 	signal,
 } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { firstValueFrom } from 'rxjs';
 import {
 	PostComment,
 	Post,
 	EmitPostData,
-} from '../../data/interfaces/post.interface';
-import { UiAvatarComponent } from '../ui-avatar/ui-avatar.component';
-import { CommonModule } from '@angular/common';
-import { UiSvgComponent } from '../ui-svg/ui-svg.component';
-import { UiPostInputComponent } from '../../ui/ui-post-input/ui-post-input.component';
-import { UiCommentComponent } from '../ui-comment/ui-comment.component';
-import { PostHttpService } from '../../data/services/post-http.service';
-import { firstValueFrom } from 'rxjs';
-import { DateConverterPipe } from '../../helpers/pipes/date-converter.pipe';
+	PostHttpService
+} from '../../data';
+import { UiPostInputComponent, UiCommentComponent } from '../../ui';
+import { UiAvatarComponent, UiSvgComponent, DateConverterPipe } from '@tt/common-ui';
 
 @Component({
 	selector: 'ui-post',

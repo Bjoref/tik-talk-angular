@@ -7,10 +7,10 @@ import { toObservable } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { UiSvgComponent } from '../../common-ui/ui-svg/ui-svg.component';
 import { UiTagComponent } from '../../common-ui/ui-tag/ui-tag.component';
-import { UiPostFeedComponent } from '../../common-ui/ui-post-feed/ui-post-feed.component';
 import { UiAvatarComponent } from '../../common-ui/ui-avatar/ui-avatar.component';
 import { Profile } from '../../data/interfaces/profile.interface';
 import { ChatHttpService } from '../../data/services/chat-http.service';
+import { UiPostFeedComponent } from '@tt/posts';
 
 @Component({
 	selector: 'page-profile',

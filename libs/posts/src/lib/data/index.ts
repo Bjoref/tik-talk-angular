@@ -1,10 +1,14 @@
-import { Post } from "./interfaces/post.interface";
+import { Post, PostComment, EmitPostData } from "./interfaces/post.interface";
 import { PostService } from "./services/post.service";
+import { PostHttpService } from "./services/post-http.service";
 
 export {
-    PostService
+    PostService,
+    PostHttpService
 }
 
 export type {
-    Post
+    Post,
+    PostComment,
+    EmitPostData
 }

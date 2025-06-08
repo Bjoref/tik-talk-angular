@@ -6,13 +6,10 @@ import {
 	Renderer2,
 	Signal,
 } from '@angular/core';
-import { UiPostInputComponent } from '../../ui/ui-post-input/ui-post-input.component';
-import { UiPostComponent } from '../ui-post/ui-post.component';
-import { PostHttpService } from '../../data/services/post-http.service';
-import { EmitPostData, Post } from '../../data/interfaces/post.interface';
 import { debounceTime, firstValueFrom, Subject, takeUntil } from 'rxjs';
-import { PostService } from '../../data/services/post.service';
-import { Profile } from '../../data/interfaces/profile.interface';
+import { UiPostInputComponent } from '../../ui';
+import { UiPostComponent } from '../ui-post/ui-post.component';
+import { PostHttpService, EmitPostData, Post, PostService } from '../../data';
 
 @Component({
 	selector: 'ui-post-feed',
