@@ -1,0 +1,32 @@
+@use '../../../indents.scss' as *;
+@use '../../../typography.scss' as *;
+
+:host {
+	text-align: left;
+	width: 100%;
+	padding: $indent-l 20px;
+	display: grid;
+	grid-template-columns: $indent-xl 1fr;
+	gap: $indent-m;
+	border-bottom: var(--light-border);
+	transition: background-color, 0.2s, ease-in-out;
+	&:hover,
+	&.active {
+		background-color: var(--dark-hover-color);
+	}
+}
+
+.ui-chats-button {
+	&__last-message {
+		cursor: pointer;
+		@include text-medium-1;
+
+		&-header {
+			margin-bottom: $indent-m;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			color: var(--light-transparent-color);
+		}
+	}
+}

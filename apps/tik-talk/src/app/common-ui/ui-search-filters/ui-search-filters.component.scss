@@ -1,0 +1,55 @@
+@use '../../../typography.scss' as *;
+@use '../../../indents.scss' as *;
+
+.settings {
+	&__form {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		padding: $indent-xl;
+		background: var(--dark-color);
+		border: var(--light-border);
+
+		&-content {
+			display: grid;
+			grid-gap: 20px;
+		}
+
+		&-columns {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			grid-gap: 20px;
+		}
+
+		&-label {
+			display: flex;
+			flex-direction: column;
+			gap: $indent-m;
+
+			&-text {
+				color: var(--light-transparent-color);
+				@include text-medium-1;
+			}
+		}
+
+		&-input {
+			height: 33px;
+			border: none;
+			border-bottom: var(--light-border);
+			background: none;
+			@include text-regular-2;
+
+			&:focus-visible {
+				outline: 1px solid var(--primary-color);
+			}
+		}
+
+		&-textarea {
+			height: 84px;
+			border: none;
+			border-bottom: var(--light-border);
+			resize: none;
+			@include text-regular-2;
+		}
+	}
+}

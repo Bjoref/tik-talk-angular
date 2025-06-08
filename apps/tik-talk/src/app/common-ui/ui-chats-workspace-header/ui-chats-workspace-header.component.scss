@@ -1,0 +1,17 @@
+@use '../../../indents.scss' as *;
+@use '../../../typography.scss' as *;
+
+:host {
+	height: 76px;
+	padding: $indent-m;
+	display: flex;
+	justify-content: center;
+	border-bottom: var(--light-border);
+}
+
+.ui-chats-workspace-header {
+	display: grid;
+	align-items: center;
+	grid-template-columns: $indent-xl 1fr;
+	gap: $indent-m;
+}

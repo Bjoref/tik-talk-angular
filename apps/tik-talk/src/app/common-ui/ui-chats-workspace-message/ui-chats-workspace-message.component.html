@@ -1,0 +1,19 @@
+@if(message(); as message) {
+<ui-avatar
+	[avatarUrl]="message.user ? message.user.avatarUrl : null"
+></ui-avatar>
+
+<div class="ui-chats-workspace-message__container">
+	<strong class="ui-chats-workspace-message__message">
+		<a class="ui-chats-workspace-message__link"
+			>{{ message.user?.firstName }}&nbsp;{{ message.user?.lastName }}</a
+		>&nbsp;<span class="ui-chats-workspace-message__time">{{
+			message.createdAt | dateConverter : 'HH:mm'
+		}}</span>
+	</strong>
+
+	<div class="ui-chats-workspace-message__text">
+		{{ message.text }}
+	</div>
+</div>
+}
