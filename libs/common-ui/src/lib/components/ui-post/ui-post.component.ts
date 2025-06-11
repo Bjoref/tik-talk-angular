@@ -48,12 +48,13 @@ export class UiPostComponent {
 	}
 
 	async onCreated(data: EmitPostData) {
-		console.log(data)
 		this.create.emit(data);
 
 		const comments = await firstValueFrom(
 			this.postService.getCommentByPostId(this.post()!.id)
 		);
+
+		console.log(comments)
 
 		this.comments.set(comments);
 	}

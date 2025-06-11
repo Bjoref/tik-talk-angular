@@ -49,14 +49,13 @@ export class UiPostInputComponent {
 	}
 
 	onCreatePost() {
-		if (!this.isMessageInput) {
+		if (!this.isMessageInput()) {
 			const data: EmitPostData = {
 				postText: this.postText,
 				isCommentInput: this.isCommentInput(),
 				profile: this.profile()!,
 				postId: this.postId(),
 			};
-
 			
 			this.create.emit(data);
 		} else {

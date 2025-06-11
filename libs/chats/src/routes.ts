@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { ChatsComponent, UiChatsWorkspaceComponent } from '../../feature-chats-page';
+import { ChatsComponent, UiChatsWorkspaceComponent } from './lib/feature-chats-page';
 
 export const chatsRoutes: Route[] = [
 	{

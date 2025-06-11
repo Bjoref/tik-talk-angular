@@ -45,7 +45,6 @@ export class UiPostFeedComponent {
 	}
 
 	onCreated(data: EmitPostData) {
-		console.log('sdfsfsfsdfsdfsf1232')
 		this.postService
 			.onCreatePost(
 				data.postText,

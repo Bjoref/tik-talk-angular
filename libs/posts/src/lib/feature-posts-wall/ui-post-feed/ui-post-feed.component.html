@@ -1,5 +1,0 @@
-<ui-post-input (create)="onCreated($event)"></ui-post-input>
-
-@for(post of posts(); track post.id) {
-<ui-post [post]="post" (create)="onCreated($event)"></ui-post>
-}
