@@ -1,4 +1,5 @@
-@use '../../../indents.scss' as *;
+@use 'indents' as *;
+@use 'typography' as *;
 
 .tag {
 	&__skill {

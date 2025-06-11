@@ -4,7 +4,7 @@ import {
 	HttpRequest,
 } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { AuthHttpService } from './auth-http.service';
+import { AuthHttpService } from '@tt/shared';
 import {
 	BehaviorSubject,
 	catchError,

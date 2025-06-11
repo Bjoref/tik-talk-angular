@@ -1,0 +1,54 @@
+@use 'indents' as *;
+@use 'typography' as *;
+
+:host {
+	display: grid;
+	grid-gap: $indent-xl;
+	grid-template-columns: 123px 1fr;
+	padding-bottom: $indent-m;
+	border-bottom: var(--light-border);
+}
+
+.ui-avatar-upload {
+	&__img {
+		height: 132px;
+		width: 132px;
+		border-radius: 50%;
+	}
+
+	&__dropzone {
+		padding: $indent-m;
+		border-radius: $indent-xxs;
+		border: 1px dashed var(--light-color);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+
+		&.fileover {
+			border: 1px dashed var(--primary-color);
+		}
+
+		&-text {
+			@include text-medium-1;
+		}
+
+		&-content {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			gap: 18px;
+		}
+
+		&-icon {
+			width: 18px;
+			height: 18px;
+			color: var(--light-color);
+		}
+	}
+
+	&__input {
+		display: none;
+	}
+}

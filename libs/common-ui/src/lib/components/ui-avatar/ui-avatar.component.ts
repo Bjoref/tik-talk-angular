@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ImgUrlPipe } from '../../helpers';
+import { ImgUrlPipe } from '@tt/shared';
 
 @Component({
 	selector: 'ui-avatar',

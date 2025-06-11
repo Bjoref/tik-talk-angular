@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-	selector: 'svg[icon]',
 	standalone: true,
+	selector: 'svg[icon]',
 	template: '<svg:use [attr.xlink:href]="href"></svg:use>',
 })
 export class UiSvgComponent {

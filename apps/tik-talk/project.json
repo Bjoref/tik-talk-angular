@@ -27,6 +27,9 @@
 					}
 				],
 				"styles": ["apps/tik-talk/src/styles.scss"],
+				"stylePreprocessorOptions": {
+					"includePaths": ["libs/shared/src/ui-styles"]
+				},
 				"scripts": []
 			},
 			"configurations": {
@@ -80,7 +83,10 @@
 						"input": "apps/tik-talk/public"
 					}
 				],
-				"styles": ["apps/tik-talk/src/styles.scss"],
+				"styles": ["apps/tik-talk/src/styles.scss", "libs/shared/src/ui-styles/index.scss"],
+				"stylePreprocessorOptions": {
+					"includePaths": ["libs/shared/src/ui-styles"]
+				},
 				"scripts": []
 			}
 		}

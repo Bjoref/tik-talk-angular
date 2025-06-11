@@ -1,0 +1,79 @@
+import { inject, Injectable, signal } from '@angular/core';
+import { HttpService, ProfileHttpService } from '@tt/shared';
+import { map, Observable } from 'rxjs';
+import { Chat, LastMessageRes, Message } from '../interfaces'
+
+@Injectable({
+	providedIn: 'root',
+})
+export class ChatHttpService extends HttpService {
+	private directionMessage: string = `${this.baseApiUrl}message/`;
+	private directionChat: string = `${this.baseApiUrl}chat/`;
+	private me = inject(ProfileHttpService).me;
+
+	activeChatessages = signal<Message[]>([]);
+
+	createChat(userId: number): Observable<Chat> {
+		return this.http.post<Chat>(`${this.directionChat}${userId}`, {});
+	}
+
+	getMyChats() {
+		return this.http.get<LastMessageRes[]>(
+			`${this.directionChat}get_my_chats/`
+		);
+	}
+
+	getChatById(chatId: number) {
+		return this.http.get<Chat>(`${this.directionChat}${chatId}`).pipe(
+			map((chat) => {
+				this.filterToCreateDate(chat.messages);
+				const patchedMessages = chat.messages.map((message) => {
+					return {
+						...message,
+						user:
+							chat.userFirst.id === message.userFromId
+								? chat.userFirst
+								: chat.userSecond,
+						isMine: message.userFromId === this.me()!.id,
+					};
+				});
+				this.activeChatessages.set(patchedMessages);
+				return {
+					...chat,
+					companion:
+						chat.userFirst.id === this.me()?.id
+							? chat.userSecond
+							: chat.userFirst,
+					messages: patchedMessages,
+				};
+			})
+		);
+	}
+
+	filterToCreateDate(a: Message[]) {
+		for (let i = 0; i < a.length - 1; i++) {
+			if (i === 0) {
+				a[i].isDate = true;
+				a[i].isFirstMessage = true;
+			}
+			if (
+				new Date(a[i].createdAt).getDay() <
+				new Date(a[i + 1].createdAt).getDay()
+			) {
+				a[i].isDate = true;
+			}
+		}
+	}
+
+	sendMessage(chatId: number, message: string) {
+		return this.http.post<Message>(
+			`${this.directionMessage}send/${chatId}`,
+			{},
+			{
+				params: {
+					message,
+				},
+			}
+		);
+	}
+}

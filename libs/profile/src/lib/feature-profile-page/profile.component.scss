@@ -1,0 +1,87 @@
+@use 'indents' as *;
+@use 'typography' as *;
+
+.profile {
+	&__header {
+		margin-bottom: $indent-l;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		&-link {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+
+			width: 174px;
+		}
+
+		&-svg {
+			width: $indent-m;
+			height: $indent-m;
+		}
+	}
+
+	&__main {
+		display: grid;
+		grid-gap: 64px;
+		padding: $indent-l;
+		grid-template-columns: 1fr 350px;
+
+		&-title {
+			margin-bottom: $indent-m;
+			@include heading-6;
+		}
+
+		&-img {
+			width: 36px;
+			height: 36px;
+			border-radius: 50%;
+		}
+
+		&-list {
+			display: flex;
+			align-items: center;
+			gap: 6px;
+			margin-bottom: $indent-xl;
+		}
+
+		&-link {
+			width: 14px;
+			height: 14px;
+			position: relative;
+			border-radius: 50%;
+			background-color: var(--light-color);
+
+			&::before,
+			&::after {
+				content: '';
+				position: absolute;
+				width: 1px;
+				height: $indent-s;
+				top: 50%;
+				left: 50%;
+				background: var(--dark-color);
+			}
+
+			&::before {
+				transform: translateY(-50%) translateX(-50%);
+			}
+
+			&:after {
+				transform: translateY(-50%) translateX(-50%) rotate(90deg);
+			}
+		}
+
+		&-tags {
+			margin-bottom: $indent-xl;
+			display: flex;
+			flex-wrap: wrap;
+			gap: $indent-xs;
+			max-height: fit-content;
+		}
+
+		&-description {
+			@include text-medium-1;
+		}
+	}
+}

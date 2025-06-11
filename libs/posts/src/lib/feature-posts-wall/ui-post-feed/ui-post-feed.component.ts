@@ -7,9 +7,8 @@ import {
 	Signal,
 } from '@angular/core';
 import { debounceTime, firstValueFrom, Subject, takeUntil } from 'rxjs';
-import { UiPostInputComponent } from '../../ui';
-import { UiPostComponent } from '../ui-post/ui-post.component';
-import { PostHttpService, EmitPostData, Post, PostService } from '../../data';
+import { UpdateHeightService, PostHttpService, EmitPostData, Post, PostService } from '@tt/shared';
+import { UiPostInputComponent, UiPostComponent } from '@tt/common-ui';
 
 @Component({
 	selector: 'ui-post-feed',
@@ -21,6 +20,7 @@ export class UiPostFeedComponent {
 	private destroy$ = new Subject<void>();
 
 	postHttpService = inject(PostHttpService);
+	updateHeightService = inject(UpdateHeightService);
 	postService = inject(PostService);
 	r2 = inject(Renderer2);
 	hostElement = inject(ElementRef);
@@ -34,12 +34,12 @@ export class UiPostFeedComponent {
 	}
 
 	ngAfterViewInit() {
-		this.postService.updateHeight(this.hostElement, this.r2, 48);
+		this.updateHeightService.updateHeight(this.hostElement, this.r2, 48);
 
 		this.resizeSubject
 			.pipe(debounceTime(100), takeUntil(this.destroy$))
 			.subscribe(() => {
-				this.postService.updateHeight(this.hostElement, this.r2, 48);
+				this.updateHeightService.updateHeight(this.hostElement, this.r2, 48);
 			});
 	}
 

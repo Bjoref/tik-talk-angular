@@ -1,0 +1,73 @@
+@use 'indents' as *;
+@use 'typography' as *;
+
+:host {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	height: 100%;
+	align-items: center;
+	margin: 0 5%;
+}
+
+.login {
+	&__title {
+		margin-bottom: 60px;
+		@include heading-1;
+	}
+
+	&__form {
+		width: 440px;
+	}
+
+	&__inputs {
+		margin-bottom: $indent-xl;
+		display: flex;
+		flex-direction: column;
+		gap: $indent-m;
+	}
+
+	&__label {
+		display: flex;
+		flex-direction: column;
+
+		&-text {
+			margin-bottom: $indent-s;
+		}
+	}
+
+	&__input {
+		width: 100%;
+		background: var(--dark-color);
+		padding: 12px 50px 12px 20px;
+		border: var(--light-border);
+		border-radius: $indent-xs;
+
+		&.error {
+			border: 1px solid var(--error-color);
+		}
+
+		&-content {
+			position: relative;
+		}
+
+		&-button {
+			position: absolute;
+			height: 17px;
+			top: 50%;
+			transform: translateY(-50%);
+			right: 12px;
+			background-color: transparent;
+			border: none;
+			color: var(--light-color);
+
+			&.active {
+				color: var(--primary-color);
+			}
+		}
+	}
+
+	&__image {
+		display: grid;
+		place-items: center center;
+	}
+}

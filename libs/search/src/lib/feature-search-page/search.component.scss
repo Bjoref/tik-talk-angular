@@ -1,0 +1,14 @@
+@use 'indents' as *;
+@use 'typography' as *;
+
+:host {
+	display: grid;
+	grid-gap: 20px;
+	padding: $indent-l;
+	height: 100%;
+}
+
+.profile-card__wrapper {
+	display: grid;
+	grid-gap: $indent-s;
+}

@@ -1,0 +1,15 @@
+<div class="ui-chats-workspace-messages-wrapper">
+	@for(message of messages(); track message.id) { 
+		@if(message.isDate) {
+			<div
+				class="ui-chats-workspace-messages-wrapper__date"
+				[class.first]="message.isFirstMessage"
+			>
+				{{ message.createdAt | date : 'dd' }}
+			</div>
+		}
+		<ui-chats-workspace-message
+			[message]="message"
+		></ui-chats-workspace-message>
+	}
+</div>

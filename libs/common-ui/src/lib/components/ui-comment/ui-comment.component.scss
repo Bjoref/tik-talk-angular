@@ -1,0 +1,22 @@
+@use 'indents' as *;
+@use 'typography' as *;
+
+.ui-comment {
+	margin-bottom: $indent-m;
+	padding-right: $indent-l;
+	display: grid;
+	grid-template-columns: $indent-xl 1fr;
+	grid-gap: $indent-m;
+
+	&__header {
+		margin-bottom: $indent-s;
+		display: flex;
+		justify-content: space-between;
+		color: var(--light-transparent-color);
+		@include text-medium-1;
+	}
+
+	&__text {
+		@include text-medium-1;
+	}
+}
