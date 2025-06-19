@@ -2,7 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
-import { ChatHttpService, ProfileHttpService } from '@tt/shared';
+import { ChatHttpService, ProfileHttpService } from '@tt/data-access';
 import { UiAvatarComponent, UiTagComponent, UiSvgComponent, UiProfileHeaderComponent, UiPostFeedComponent } from '@tt/common-ui';
 import { firstValueFrom, switchMap } from 'rxjs';
 

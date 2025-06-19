@@ -8,7 +8,7 @@ import {
 	Renderer2,
 } from '@angular/core';
 import { UiAvatarComponent, UiSvgComponent } from '@tt/common-ui';
-import { ProfileHttpService, PostHttpService, CommentHttpService, PostService, EmitPostData } from '@tt/shared';
+import { ProfileHttpService, PostHttpService, CommentHttpService, PostService, EmitPostData } from '@tt/data-access';
 import { FormsModule } from '@angular/forms';
 import { Subject } from 'rxjs';
 

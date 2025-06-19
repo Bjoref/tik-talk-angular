@@ -5,6 +5,9 @@ import { LayoutComponent } from '@tt/layout';
 import { accessGuard, LoginComponent } from '@tt/auth';
 import { SettingsComponent } from '@tt/settings';
 import { chatsRoutes } from '@tt/chats';
+import { provideState } from '@ngrx/store';
+import { profileFeature, ProfileEffects } from '@tt/data-access';
+import { provideEffects } from '@ngrx/effects';
 
 export const routes: Routes = [
 	{
@@ -14,7 +17,14 @@ export const routes: Routes = [
 			{ path: '', redirectTo: 'profile/me', pathMatch: 'full' },
 			{ path: 'profile/:id', component: ProfileComponent },
 			{ path: 'settings', component: SettingsComponent },
-			{ path: 'search', component: SearchComponent },
+			{ 
+				path: 'search', 
+				component: SearchComponent ,
+				providers: [
+					provideState(profileFeature),
+					provideEffects(ProfileEffects)
+				]
+			},
 			{ path: 'chats', loadChildren: () => chatsRoutes },
 		],
 		canActivate: [accessGuard],

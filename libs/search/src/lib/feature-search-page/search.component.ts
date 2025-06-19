@@ -1,7 +1,8 @@
 import { Component, inject } from '@angular/core';
-import { ProfileHttpService } from '@tt/shared';
 import { UiProfileCardComponent, UiSearchFiltersComponent } from '@tt/common-ui';
+import { selectFilteredProfiles } from '@tt/data-access';
 import { CommonModule } from '@angular/common';
+import { Store } from '@ngrx/store'
 
 @Component({
 	selector: 'page-search',
@@ -10,6 +11,7 @@ import { CommonModule } from '@angular/common';
 	styleUrl: './search.component.scss',
 })
 export class SearchComponent {
-	profileService = inject(ProfileHttpService);
-	profiles = this.profileService.filteredProfiles;
+	store = inject(Store);
+
+	profiles = this.store.selectSignal(selectFilteredProfiles);
 }

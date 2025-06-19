@@ -7,7 +7,7 @@ import {
 	Signal,
 } from '@angular/core';
 import { debounceTime, firstValueFrom, Subject, takeUntil } from 'rxjs';
-import { UpdateHeightService, PostHttpService, EmitPostData, Post, PostService } from '@tt/shared';
+import { UpdateHeightService, PostHttpService, EmitPostData, Post, PostService } from '@tt/data-access';
 import { UiPostInputComponent } from '../ui-post-input/ui-post-input.component';
 import { UiPostComponent } from '../ui-post/ui-post.component';
 
@@ -59,7 +59,6 @@ export class UiPostFeedComponent {
 					console.error('Ошибка:', err);
 				},
 				complete: () => {
-					console.log('complete');
 				},
 			});
 	}

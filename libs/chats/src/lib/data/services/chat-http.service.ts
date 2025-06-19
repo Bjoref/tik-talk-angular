@@ -1,5 +1,5 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { HttpService, ProfileHttpService } from '@tt/shared';
+import { HttpService, ProfileHttpService } from '@tt/data-access';
 import { map, Observable } from 'rxjs';
 import { Chat, LastMessageRes, Message } from '../interfaces'
 

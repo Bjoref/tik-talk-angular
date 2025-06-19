@@ -1,7 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { UiSvgComponent } from '../ui-svg/ui-svg.component';
 import { RouterModule } from '@angular/router';
-import { ProfileHttpService, ImgUrlPipe } from '@tt/shared';
+import { ProfileHttpService} from '@tt/data-access';
+import { ImgUrlPipe } from '@tt/shared';
 import { CommonModule } from '@angular/common';
 import { firstValueFrom } from 'rxjs';
 import { UiSubscriberCardComponent } from '../ui-subscriber-card/ui-subscriber-card.component';

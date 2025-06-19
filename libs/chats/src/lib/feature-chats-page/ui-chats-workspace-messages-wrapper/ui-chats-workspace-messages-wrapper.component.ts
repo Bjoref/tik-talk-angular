@@ -11,7 +11,7 @@ import { UiChatsWorkspaceMessageComponent } from '../ui-chats-workspace-message'
 import { ChatHttpService } from '../../data';
 import { Chat } from '../../data/interfaces';
 import { debounceTime, Subject, takeUntil } from 'rxjs';
-import { UpdateHeightService } from '@tt/shared';
+import { UpdateHeightService } from '@tt/data-access';
 import { CommonModule } from '@angular/common';
 
 @Component({

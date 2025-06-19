@@ -1,8 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { ProfileHttpService } from '@tt/shared';
+import { profileActions, ProfileHttpService, selectFilters } from '@tt/data-access';
 import { debounceTime, startWith, switchMap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Store } from '@ngrx/store'
 
 @Component({
 	selector: 'ui-search-filters',
@@ -13,6 +14,11 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 export class UiSearchFiltersComponent {
 	profileService = inject(ProfileHttpService);
 	fb = inject(FormBuilder);
+
+	store = inject(Store);
+
+	filters = this.store.selectSignal(selectFilters);
+
 
 	searchForm = this.fb.group({
 		firstName: [''],
@@ -25,11 +31,16 @@ export class UiSearchFiltersComponent {
 			.pipe(
 				startWith({}),
 				debounceTime(300),
-				switchMap((formValue) => {
-					return this.profileService.filterProfiles(formValue);
-				}),
 				takeUntilDestroyed()
 			)
-			.subscribe();
+			.subscribe(formValue => {
+				this.store.dispatch(profileActions.filterEvents({filters: formValue}))
+			});
+	}
+
+	ngAfterViewInit() {
+		if(this.filters()) {
+			this.searchForm.patchValue(this.filters())
+		}
 	}
 }

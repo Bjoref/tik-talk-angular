@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { Profile } from '@tt/shared';
+import { Profile } from '@tt/data-access';
 import { CommonModule } from '@angular/common';
 import { UiAvatarComponent } from '@tt/common-ui';
 

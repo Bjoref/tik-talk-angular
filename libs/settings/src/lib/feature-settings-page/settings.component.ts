@@ -1,7 +1,7 @@
 import { Component, inject, ViewChild } from '@angular/core';
 import { UiProfileHeaderComponent, UiAvatarUploadComponent} from '@tt/common-ui';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
-import { ProfileHttpService, AuthHttpService } from '@tt/shared';
+import { ProfileHttpService, AuthHttpService } from '@tt/data-access';
 import { firstValueFrom } from 'rxjs';
 
 @Component({

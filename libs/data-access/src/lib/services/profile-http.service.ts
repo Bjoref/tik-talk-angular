@@ -10,7 +10,6 @@ export class ProfileHttpService extends HttpService {
 	private direction: string = `${this.baseApiUrl}account/`;
 
 	me = signal<Profile | null>(null);
-	filteredProfiles = signal<Profile[]>([]);
 
 	getTestsAccounts(): Observable<Profile[]> {
 		return this.http.get<Profile[]>(`${this.direction}test_accounts`);
@@ -48,6 +47,5 @@ export class ProfileHttpService extends HttpService {
 	filterProfiles(params: Record<string, any>) {
 		return this.http
 			.get<Pageable<Profile>>(`${this.direction}accounts`, { params })
-			.pipe(tap((res) => this.filteredProfiles.set(res.items)));
 	}
 }

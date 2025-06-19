@@ -9,13 +9,8 @@ import {
 import { CommonModule } from '@angular/common';
 import { firstValueFrom } from 'rxjs';
 
-import {
-	DateConverterPipe,
-	PostComment,
-	Post,
-	EmitPostData,
-	PostHttpService,
-} from '@tt/shared';
+import { DateConverterPipe } from '@tt/shared';
+import { PostComment, Post, EmitPostData, PostHttpService } from '@tt/data-access';
 import { UiAvatarComponent } from '../ui-avatar/ui-avatar.component';
 import { UiSvgComponent } from '../ui-svg/ui-svg.component';
 import { UiPostInputComponent } from '../ui-post-input/ui-post-input.component';
@@ -53,8 +48,6 @@ export class UiPostComponent {
 		const comments = await firstValueFrom(
 			this.postService.getCommentByPostId(this.post()!.id)
 		);
-
-		console.log(comments)
 
 		this.comments.set(comments);
 	}

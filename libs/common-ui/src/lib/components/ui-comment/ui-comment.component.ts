@@ -1,7 +1,8 @@
 import { Component, input } from '@angular/core';
 import { UiAvatarComponent } from '../ui-avatar/ui-avatar.component';
 import { CommonModule } from '@angular/common';
-import { DateConverterPipe, PostComment } from '@tt/shared';
+import { DateConverterPipe } from '@tt/shared';
+import {  PostComment } from '@tt/data-access';
 
 @Component({
 	selector: 'ui-comment',

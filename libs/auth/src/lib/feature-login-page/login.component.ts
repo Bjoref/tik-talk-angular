@@ -11,7 +11,8 @@ import {
 	ReactiveFormsModule,
 	Validators,
 } from '@angular/forms';
-import { FormInput, LoginMouseOverDirective, AuthHttpService } from '@tt/shared';
+import { LoginMouseOverDirective } from '@tt/shared';
+import { FormInput, AuthHttpService } from '@tt/data-access';
 import { UiButtonComponent } from '@tt/common-ui';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';

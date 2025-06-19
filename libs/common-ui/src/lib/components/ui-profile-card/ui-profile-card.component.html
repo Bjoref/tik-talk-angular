@@ -1,11 +1,7 @@
 @if(profile) {
 <div class="profile-card">
 	<div class="profile-card__user">
-		<img
-			[src]="profile.avatarUrl | imgUrl"
-			[alt]="profile.lastName"
-			class="profile-card__user-avatar"
-		/>
+		<ui-avatar [avatarUrl]="profile.avatarUrl"></ui-avatar>
 
 		<div class="profile-card__user-name">
 			<strong>
