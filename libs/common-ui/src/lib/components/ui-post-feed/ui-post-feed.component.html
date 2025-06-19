@@ -1,5 +1,5 @@
-<ui-post-input (create)="onCreated($event)"  data-test_2></ui-post-input>
+<ui-post-input (create)="onCreated($event)"></ui-post-input>
 
 @for(post of posts(); track post.id) {
-<ui-post [post]="post" (create)="onCreated($event)" data-test_1></ui-post>
+    <ui-post [post]="post" [comments]="post.comments" (create)="onCreated($event)"></ui-post>
 }

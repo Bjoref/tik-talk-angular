@@ -1,4 +1,5 @@
 import {
+	ChangeDetectorRef,
 	Component,
 	ElementRef,
 	HostListener,
@@ -6,14 +7,23 @@ import {
 	Renderer2,
 	Signal,
 } from '@angular/core';
-import { debounceTime, firstValueFrom, Subject, takeUntil } from 'rxjs';
-import { UpdateHeightService, PostHttpService, EmitPostData, Post, PostService } from '@tt/data-access';
+import { debounceTime, firstValueFrom, Subject, take, takeUntil } from 'rxjs';
+import {
+	UpdateHeightService,
+	PostHttpService,
+	EmitPostData,
+	Post,
+	PostService,
+	selectPosts,
+	postsActions,
+} from '@tt/data-access';
 import { UiPostInputComponent } from '../ui-post-input/ui-post-input.component';
 import { UiPostComponent } from '../ui-post/ui-post.component';
+import { Store } from '@ngrx/store';
 
 @Component({
 	selector: 'ui-post-feed',
-	imports: [UiPostInputComponent, UiPostComponent	],
+	imports: [UiPostInputComponent, UiPostComponent],
 	templateUrl: './ui-post-feed.component.html',
 	styleUrl: './ui-post-feed.component.scss',
 })
@@ -25,13 +35,14 @@ export class UiPostFeedComponent {
 	postService = inject(PostService);
 	r2 = inject(Renderer2);
 	hostElement = inject(ElementRef);
+	store = inject(Store);
 
 	private resizeSubject = new Subject<Event>();
 
-	posts: Signal<Post[]> = this.postHttpService.posts;
+	posts: Signal<Post[]> = this.store.selectSignal(selectPosts);
 
 	constructor() {
-		firstValueFrom(this.postHttpService.fetchPost());
+		this.postDispatchStore();
 	}
 
 	ngAfterViewInit() {
@@ -40,7 +51,11 @@ export class UiPostFeedComponent {
 		this.resizeSubject
 			.pipe(debounceTime(100), takeUntil(this.destroy$))
 			.subscribe(() => {
-				this.updateHeightService.updateHeight(this.hostElement, this.r2, 48);
+				this.updateHeightService.updateHeight(
+					this.hostElement,
+					this.r2,
+					48
+				);
 			});
 	}
 
@@ -59,7 +74,17 @@ export class UiPostFeedComponent {
 					console.error('Ошибка:', err);
 				},
 				complete: () => {
+					this.postDispatchStore();
 				},
+			});
+	}
+
+	postDispatchStore() {
+		this.postHttpService
+			.fetchPost()
+			.pipe(take(1))
+			.subscribe((res) => {
+				this.store.dispatch(postsActions.postsLoaded({ posts: res }));
 			});
 	}
 

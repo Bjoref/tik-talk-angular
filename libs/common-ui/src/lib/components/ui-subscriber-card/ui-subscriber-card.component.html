@@ -1,9 +1,8 @@
 @if(profile) {
-<img
+<ui-avatar
+	[avatarUrl]="profile.avatarUrl"
 	class="ui-subscriber__img"
-	[src]="profile.avatarUrl | imgUrl"
-	alt="profile.firstName"
-/>
+></ui-avatar>
 
 <strong> {{ profile.firstName }} {{ profile.lastName }}</strong>
 }

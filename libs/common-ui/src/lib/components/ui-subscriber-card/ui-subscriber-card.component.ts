@@ -1,10 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { Profile } from '@tt/data-access';
-import { ImgUrlPipe } from '@tt/shared';
+import { UiAvatarComponent } from "../ui-avatar/ui-avatar.component";
 
 @Component({
 	selector: 'ui-subscriber-card',
-	imports: [ImgUrlPipe],
+	imports: [UiAvatarComponent],
 	templateUrl: './ui-subscriber-card.component.html',
 	styleUrl: './ui-subscriber-card.component.scss',
 })

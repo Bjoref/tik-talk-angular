@@ -1,14 +1,17 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { CommentHttpService } from './comment-http.service';
 import { Observable, of } from 'rxjs';
 import { PostHttpService } from './post-http.service';
 import { Post, PostComment } from '../interfaces/post.interface';
 import { Profile } from '../interfaces';
+import { Store } from '@ngrx/store';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class PostService {
+	store = inject(Store);
+
 	constructor(
 		private commentService: CommentHttpService,
 		private postHttpService: PostHttpService
@@ -19,7 +22,7 @@ export class PostService {
 		isCommentInput: boolean,
 		profile: Profile,
 		postId: number
-	): Observable<Post[] | PostComment | null> {
+	): Observable<Post | PostComment | null> {
 		if (!postText) {
 			return of(null); // Возвращаем Observable с null
 		}

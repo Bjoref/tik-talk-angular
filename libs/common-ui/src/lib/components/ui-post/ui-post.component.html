@@ -15,16 +15,18 @@
 			{{ post.content }}
 		</p>
 
-		<div class="ui-post__counters">
-			<svg icon="comments" class="ui-post__svg"></svg>
-			<span class="ui-post__count">{{ comments().length }}</span>
-		</div>
-
-		<div class="ui-post__comments ui-post__comments1123123">
-			@for(comment of comments(); track comment.id) {
-			<ui-comment [comment]="comment"></ui-comment>
-			}
-		</div>
+		@if(comments(); as comments) {
+			<div class="ui-post__counters">
+				<svg icon="comments" class="ui-post__svg"></svg>
+				<span class="ui-post__count">{{ comments.length }}</span>
+			</div>
+	
+			<div class="ui-post__comments">
+				@for(comment of comments; track comment.id) {
+				<ui-comment [comment]="comment"></ui-comment>
+				}
+			</div>
+		}
 	</div>
 
 	<ui-post-input

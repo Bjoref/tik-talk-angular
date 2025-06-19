@@ -33,22 +33,11 @@ export class UiPostComponent {
 	@Output() create = new EventEmitter();
 
 	post = input<Post>();
-
-	comments = signal<PostComment[]>([]);
+	comments = input<PostComment[]>();
 
 	postService = inject(PostHttpService);
 
-	async ngOnInit() {
-		this.comments.set(this.post()!.comments);
-	}
-
 	async onCreated(data: EmitPostData) {
 		this.create.emit(data);
-
-		const comments = await firstValueFrom(
-			this.postService.getCommentByPostId(this.post()!.id)
-		);
-
-		this.comments.set(comments);
 	}
 }
