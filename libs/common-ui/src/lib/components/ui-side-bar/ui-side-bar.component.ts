@@ -1,11 +1,14 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Signal } from '@angular/core';
 import { UiSvgComponent } from '../ui-svg/ui-svg.component';
 import { RouterModule } from '@angular/router';
-import { ProfileHttpService} from '@tt/data-access';
+import { ChatHttpService, ProfileHttpService } from '@tt/data-access';
 import { ImgUrlPipe } from '@tt/shared';
 import { CommonModule } from '@angular/common';
 import { firstValueFrom } from 'rxjs';
 import { UiSubscriberCardComponent } from '../ui-subscriber-card/ui-subscriber-card.component';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Store } from '@ngrx/store';
+import { selectCount } from 'libs/data-access/src/lib/store/messageStore';
 
 @Component({
 	selector: 'ui-side-bar',
@@ -21,10 +24,19 @@ import { UiSubscriberCardComponent } from '../ui-subscriber-card/ui-subscriber-c
 })
 export class UiSideBarComponent {
 	profileService = inject(ProfileHttpService);
+	store = inject(Store);
 
 	me = this.profileService.me;
 
 	subscribers$ = this.profileService.getSubscribersShortList();
+
+	count: Signal<number> = this.store.selectSignal(selectCount);
+
+	private chatService = inject(ChatHttpService);
+
+	constructor() {
+		this.chatService.connectWS().pipe(takeUntilDestroyed()).subscribe();
+	}
 
 	menuItems = [
 		{
@@ -44,7 +56,7 @@ export class UiSideBarComponent {
 		},
 	];
 
-	ngOnInit() {
-		firstValueFrom(this.profileService.getMe());
+	async ngOnInit() {
+		await firstValueFrom(this.profileService.getMe());
 	}
 }

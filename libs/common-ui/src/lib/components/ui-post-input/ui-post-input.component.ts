@@ -56,7 +56,6 @@ export class UiPostInputComponent {
 				profile: this.profile()!,
 				postId: this.postId(),
 			};
-			
 			this.create.emit(data);
 		} else {
 			this.createMessage.emit(this.postText);

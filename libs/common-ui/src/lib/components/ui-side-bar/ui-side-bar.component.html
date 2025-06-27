@@ -11,6 +11,9 @@
 			>
 				<svg [icon]="item.icon" class="side-bar__menu-svg"></svg>
 				<span>{{ item.label }}</span>
+				@if (item.link === 'chats') {
+					<div class="side-bar__menu-message-count">{{ count() }}</div>
+				}
 			</a>
 		</li>
 		}

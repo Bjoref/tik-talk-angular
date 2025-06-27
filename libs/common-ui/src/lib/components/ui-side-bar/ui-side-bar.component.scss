@@ -51,6 +51,15 @@
 			width: $indent-m;
 			height: $indent-m;
 		}
+
+		&-message-count {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 1px 5px;
+			background-color: var(--primary-color);
+			color: var(--dark-color);
+		}
 	}
 
 	&__title {

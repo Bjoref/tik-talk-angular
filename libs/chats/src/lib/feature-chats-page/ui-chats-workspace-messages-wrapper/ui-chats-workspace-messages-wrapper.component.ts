@@ -8,15 +8,15 @@ import {
 	Renderer2,
 } from '@angular/core';
 import { UiChatsWorkspaceMessageComponent } from '../ui-chats-workspace-message';
-import { ChatHttpService } from '../../data';
 import { Chat } from '../../data/interfaces';
 import { debounceTime, Subject, takeUntil } from 'rxjs';
-import { UpdateHeightService } from '@tt/data-access';
+import { ChatHttpService, UpdateHeightService } from '@tt/data-access';
 import { CommonModule } from '@angular/common';
+import { ChatDayPipe } from '@tt/shared';
 
 @Component({
 	selector: 'ui-chats-workspace-messages-wrapper',
-	imports: [UiChatsWorkspaceMessageComponent, CommonModule],
+	imports: [UiChatsWorkspaceMessageComponent, CommonModule, ChatDayPipe],
 	templateUrl: './ui-chats-workspace-messages-wrapper.component.html',
 	styleUrl: './ui-chats-workspace-messages-wrapper.component.scss',
 })

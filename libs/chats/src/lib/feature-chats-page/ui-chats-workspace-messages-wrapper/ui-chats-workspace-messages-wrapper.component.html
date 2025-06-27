@@ -5,7 +5,7 @@
 				class="ui-chats-workspace-messages-wrapper__date"
 				[class.first]="message.isFirstMessage"
 			>
-				{{ message.createdAt | date : 'dd' }}
+				{{ message.createdAt | chatDay }}
 			</div>
 		}
 		<ui-chats-workspace-message

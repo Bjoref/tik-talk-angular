@@ -18,6 +18,7 @@
 
 .ui-chats-button {
 	&__last-message {
+		overflow: hidden;
 		cursor: pointer;
 		@include text-medium-1;
 

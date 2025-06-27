@@ -6,7 +6,7 @@ import { accessGuard, LoginComponent } from '@tt/auth';
 import { SettingsComponent } from '@tt/settings';
 import { chatsRoutes } from '@tt/chats';
 import { provideState } from '@ngrx/store';
-import { profileFeature, ProfileEffects, postsFeature } from '@tt/data-access';
+import { profileFeature, ProfileEffects, postsFeature, messageFeature, tokenFeature } from '@tt/data-access';
 import { provideEffects } from '@ngrx/effects';
 
 export const routes: Routes = [
@@ -36,6 +36,8 @@ export const routes: Routes = [
 			{ path: 'chats', loadChildren: () => chatsRoutes },
 		],
 		canActivate: [accessGuard],
+		providers: [provideState(messageFeature), provideState(tokenFeature)],
+
 	},
 	{ path: 'login', component: LoginComponent },
 ];

@@ -2,7 +2,6 @@ import { Component, inject } from '@angular/core';
 import { UiChatsWorkspaceHeaderComponent } from '../ui-chats-workspace-header';
 import { UiChatsWorkspaceMessagesWrapperComponent } from '../ui-chats-workspace-messages-wrapper';
 import { ActivatedRoute } from '@angular/router';
-import { ChatHttpService } from '../../data';
 import {
 	firstValueFrom,
 	switchMap,
@@ -11,6 +10,7 @@ import {
 } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { UiPostInputComponent } from '@tt/common-ui';
+import { ChatHttpService } from '@tt/data-access';
 
 @Component({
 	selector: 'ui-chats-workspace',
@@ -40,16 +40,17 @@ export class UiChatsWorkspaceComponent {
 		tap(({ id }) => (this.id = id))
 	);
 
-	async onSendMessage(text: string) {
-		this.getChatsInterval.unsubscribe();
-		await firstValueFrom(this.chatService.sendMessage(this.id, text));
+	onSendMessage(text: string) {
+		this.chatService.wsApadter.sendMessage(text, this.id)
+		// this.getChatsInterval.unsubscribe();
+		// await firstValueFrom(this.chatService.sendMessage(this.id, text));
 
-		await firstValueFrom(this.chatService.getChatById(this.id));
+		// await firstValueFrom(this.chatService.getChatById(this.id));
 
-		this.getChatsInterval = this.chatInterval.subscribe(() => {
-			if (this.id) {
-				firstValueFrom(this.chatService.getChatById(this.id));
-			}
-		});
+		// this.getChatsInterval = this.chatInterval.subscribe(() => {
+		// 	if (this.id) {
+		// 		firstValueFrom(this.chatService.getChatById(this.id));
+		// 	}
+		// });
 	}
 }

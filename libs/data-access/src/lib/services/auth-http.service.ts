@@ -1,27 +1,36 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, Signal } from '@angular/core';
 import { catchError, Observable, tap, throwError } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { AuthToken } from '../interfaces/auth.interface';
 import { HttpService } from './http.service';
+import { Store } from '@ngrx/store';
+import { selectToken, tokenActions } from '../store/tokenStore';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class AuthHttpService extends HttpService {
-	private direction: string = `${this.baseApiUrl}auth/`;
-
-	public token: string | null = null;
-	public refreshToken: string | null = null;
-
+	store = inject(Store);
 	router = inject(Router);
 	cookieService = inject(CookieService);
 
+	private direction: string = `${this.baseApiUrl}auth/`;
+
+	public token: Signal<string | null> = this.store.selectSignal(selectToken);
+
+	public refreshToken: string | null = null;
+
 	get isAuth(): boolean {
 		if (!this.token) {
-			this.token = this.cookieService.get('token');
+			this.store.dispatch(
+				tokenActions.refreshToken({
+					token: this.cookieService.get('token'),
+				})
+			);
 			this.refreshToken = this.cookieService.get('refreshToken');
 		}
+
 		return !!this.token;
 	}
 
@@ -63,7 +72,7 @@ export class AuthHttpService extends HttpService {
 			() => {},
 			() => {
 				this.cookieService.deleteAll();
-				this.token = null;
+				this.store.dispatch(tokenActions.refreshToken({ token: null }));
 				this.refreshToken = null;
 				this.router.navigate(['/login']);
 			}
@@ -71,10 +80,12 @@ export class AuthHttpService extends HttpService {
 	}
 
 	saveToken(val: AuthToken) {
-		this.token = val.access_token;
+		const token = val.access_token;
+		this.store.dispatch(tokenActions.refreshToken({ token }));
+
 		this.refreshToken = val.refresh_token;
 
-		this.cookieService.set('token', this.token);
+		this.cookieService.set('token', token);
 		this.cookieService.set('refreshToken', this.refreshToken);
 	}
 }

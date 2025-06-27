@@ -15,7 +15,6 @@ export const postsFeature = createFeature({
 	reducer: createReducer(
 		initialState,
 		on(postsActions.postsLoaded, (state, payload) => {
-			console.log(state)
 			return {
 				...state,
 				posts: payload.posts,

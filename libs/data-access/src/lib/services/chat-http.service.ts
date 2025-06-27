@@ -3,16 +3,60 @@ import { HttpService } from './http.service';
 import { map, Observable } from 'rxjs';
 import { ProfileHttpService } from './profile-http.service';
 import { Chat, LastMessageRes, Message } from '../interfaces/chat.interface';
+import { AuthHttpService } from './auth-http.service';
+import { ChatWSService } from '../interfaces/chats-ws-service.interface';
+import { ChatWSMessage } from '../interfaces/chat-ws-message.interface';
+import { isNewMessage, isUnreadMessage } from '../interfaces/type-guard';
+import { ChatWSRxjsService } from './chat-ws-rxjs.service';
+import { Store } from '@ngrx/store';
+import { messageActions } from '../store/messageStore';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class ChatHttpService extends HttpService {
+	store = inject(Store);
+
 	private directionMessage: string = `${this.baseApiUrl}message/`;
 	private directionChat: string = `${this.baseApiUrl}chat/`;
 	private me = inject(ProfileHttpService).me;
+	private authService = inject(AuthHttpService);
 
 	activeChatessages = signal<Message[]>([]);
+
+	wsApadter: ChatWSService = new ChatWSRxjsService();
+
+	connectWS() {
+		return this.wsApadter.connect({
+			url: `${this.directionChat}ws`,
+			token: this.authService.token ?? '',
+			handleMessage: this.handleWSMessage,
+		}) as Observable<ChatWSMessage>;
+	}
+
+	handleWSMessage = (message: ChatWSMessage) => {
+		if (!('action' in message)) return;
+
+		if (isUnreadMessage(message)) {
+			this.store.dispatch(messageActions.messageUnread({ count: message.data.count }));
+		}
+
+		if (isNewMessage(message)) {
+			this.activeChatessages.set([
+				...this.activeChatessages(),
+				{
+					id: message.data.id,
+					userFromId: message.data.author,
+					personalChatId: message.data.chat_id,
+					text: message.data.message,
+					createdAt: message.data.created_at,
+					isRead: false,
+					isMine: false,
+					updatedAt: message.data.updated_at || '',
+				},
+			]);
+		}
+	};
 
 	createChat(userId: number): Observable<Chat> {
 		return this.http.post<Chat>(`${this.directionChat}${userId}`, {});

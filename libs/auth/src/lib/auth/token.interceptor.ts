@@ -56,17 +56,17 @@ const refreshAndPrcced = (
 	}
 
 	if (req.url.includes('refresh'))
-		return next(addToken(req, authService.token!));
+		return next(addToken(req, authService.token()!));
 
 	return isRefreshing$.pipe(
 		filter((isRefreshing$) => !isRefreshing$),
 		switchMap((res) => {
-			return next(addToken(req, authService.token!));
+			return next(addToken(req, authService.token()!));
 		})
 	);
 };
 
-const addToken = (req: HttpRequest<any>, token: string) => {
+const addToken = (req: HttpRequest<any>, token: string | null) => {
 	return req.clone({
 		setHeaders: {
 			Authorization: `Bearer ${token}`,

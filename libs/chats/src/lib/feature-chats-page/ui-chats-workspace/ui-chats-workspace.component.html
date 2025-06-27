@@ -7,6 +7,7 @@
 ></ui-chats-workspace-messages-wrapper>
 <ui-post-input
 	(createMessage)="onSendMessage($event)"
+	[isMessageInput]="true"
 	class="ui-chats-workspace__input"
 ></ui-post-input>
 }
