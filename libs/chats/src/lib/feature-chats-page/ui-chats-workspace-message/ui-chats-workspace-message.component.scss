@@ -6,18 +6,24 @@
 	grid-template-columns: $indent-xl 1fr;
 	grid-gap: 12px;
 
+	& ui-avatar {
+		width: 32px;
+	}
+
 	&.is-mine {
-		grid-template-columns: min-content $indent-xl;
+		width: 100%;
+		display: flex;
+		flex-direction: row-reverse;
 		align-self: end;
 		padding-right: $indent-l;
 
 		& .ui-chats-workspace-message {
 			&__container {
+				width: 100%;
 				flex-direction: column;
 				justify-content: end;
 				align-items: flex-end;
 				display: flex;
-				order: -1;
 			}
 
 			&__text {
@@ -40,7 +46,9 @@
 		@include text-regular-1;
 	}
 	&__text {
-		max-width: 35%;
+		width: fit-content;
+		max-width: 70%;
+		align-self: flex-end;
 		display: inline-block;
 		word-wrap: break-word;
 		padding: $indent-s 12px;

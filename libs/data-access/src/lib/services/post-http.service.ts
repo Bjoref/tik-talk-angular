@@ -13,7 +13,11 @@ export class PostHttpService extends HttpService {
 		return this.http.post<Post>(`${this.direction}`, payload);
 	}
 
-	fetchPost() {
-		return this.http.get<Post[]>(`${this.direction}`)
+	fetchPost(id: string | number) {
+		if(id && id !== 'me') {
+			return this.http.get<Post[]>(`${this.direction}${id}`)
+		}
+			return this.http.get<Post[]>(`${this.direction}`)
+
 	}
 }

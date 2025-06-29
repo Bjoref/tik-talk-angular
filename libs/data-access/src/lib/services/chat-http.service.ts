@@ -1,6 +1,6 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { HttpService } from './http.service';
-import { map, Observable } from 'rxjs';
+import { map, Observable, take, tap } from 'rxjs';
 import { ProfileHttpService } from './profile-http.service';
 import { Chat, LastMessageRes, Message } from '../interfaces/chat.interface';
 import { AuthHttpService } from './auth-http.service';
@@ -38,7 +38,9 @@ export class ChatHttpService extends HttpService {
 		if (!('action' in message)) return;
 
 		if (isUnreadMessage(message)) {
-			this.store.dispatch(messageActions.messageUnread({ count: message.data.count }));
+			this.store.dispatch(
+				messageActions.messageUnread({ count: message.data.count })
+			);
 		}
 
 		if (isNewMessage(message)) {
@@ -51,7 +53,7 @@ export class ChatHttpService extends HttpService {
 					text: message.data.message,
 					createdAt: message.data.created_at,
 					isRead: false,
-					isMine: false,
+					isMine: true,
 					updatedAt: message.data.updated_at || '',
 				},
 			]);
@@ -63,9 +65,25 @@ export class ChatHttpService extends HttpService {
 	}
 
 	getMyChats() {
-		return this.http.get<LastMessageRes[]>(
-			`${this.directionChat}get_my_chats/`
-		);
+		return this.http
+			.get<LastMessageRes[]>(`${this.directionChat}get_my_chats/`)
+			.pipe(
+				map((res) => {
+					console.log(res);
+					console.log(
+						res.sort(function (a, b) {
+							if (a.id < b.id) return 1;
+							if (a.id > b.id) return -1;
+							return 0;
+						})
+					);
+					return res.sort(function (a, b) {
+						if (a.createdAt < b.createdAt) return 1;
+						if (a.createdAt > b.createdAt) return -1;
+						return 0;
+					});
+				})
+			);
 	}
 
 	getChatById(chatId: number) {

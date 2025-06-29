@@ -1,20 +1,18 @@
 import {
-	ChangeDetectorRef,
 	Component,
 	ElementRef,
 	HostListener,
 	inject,
+	input,
 	Renderer2,
-	Signal,
 } from '@angular/core';
-import { debounceTime, firstValueFrom, Subject, take, takeUntil } from 'rxjs';
+import { debounceTime, Subject, take, takeUntil } from 'rxjs';
 import {
 	UpdateHeightService,
 	PostHttpService,
 	EmitPostData,
 	Post,
 	PostService,
-	selectPosts,
 	postsActions,
 } from '@tt/data-access';
 import { UiPostInputComponent } from '../ui-post-input/ui-post-input.component';
@@ -36,14 +34,10 @@ export class UiPostFeedComponent {
 	r2 = inject(Renderer2);
 	hostElement = inject(ElementRef);
 	store = inject(Store);
+	posts = input<Post[]>();
+	id = input.required<string>();
 
 	private resizeSubject = new Subject<Event>();
-
-	posts: Signal<Post[]> = this.store.selectSignal(selectPosts);
-
-	constructor() {
-		this.postDispatchStore();
-	}
 
 	ngAfterViewInit() {
 		this.updateHeightService.updateHeight(this.hostElement, this.r2, 48);
@@ -81,7 +75,7 @@ export class UiPostFeedComponent {
 
 	postDispatchStore() {
 		this.postHttpService
-			.fetchPost()
+			.fetchPost(this.id())
 			.pipe(take(1))
 			.subscribe((res) => {
 				this.store.dispatch(postsActions.postsLoaded({ posts: res }));

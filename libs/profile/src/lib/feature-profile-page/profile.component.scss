@@ -39,7 +39,8 @@
 		}
 
 		&-list {
-			display: flex;
+			display: grid;
+			grid-template-columns: repeat(7, 36px);
 			align-items: center;
 			gap: 6px;
 			margin-bottom: $indent-xl;

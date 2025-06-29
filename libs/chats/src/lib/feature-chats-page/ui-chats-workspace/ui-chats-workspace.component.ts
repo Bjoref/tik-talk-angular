@@ -28,19 +28,13 @@ export class UiChatsWorkspaceComponent {
 	chatService = inject(ChatHttpService);
 	private id: number = 0;
 
-	chatInterval = interval(5000);
-	getChatsInterval = this.chatInterval.subscribe(() => {
-		if (this.id) {
-			firstValueFrom(this.chatService.getChatById(this.id));
-		}
-	});
-
 	activeChat$ = this.route.params.pipe(
 		switchMap(({ id }) => this.chatService.getChatById(id)),
 		tap(({ id }) => (this.id = id))
 	);
 
 	onSendMessage(text: string) {
+		console.log(text)
 		this.chatService.wsApadter.sendMessage(text, this.id)
 		// this.getChatsInterval.unsubscribe();
 		// await firstValueFrom(this.chatService.sendMessage(this.id, text));

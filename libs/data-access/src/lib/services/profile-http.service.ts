@@ -23,7 +23,12 @@ export class ProfileHttpService extends HttpService {
 		);
 	}
 
-	getSubscribersShortList(amount: number = 3) {
+	getSubscribersShortList(amount: number = 3, id?: string | number) {
+		if(id && id !== 'me') {
+		return this.http
+			.get<Pageable<Profile>>(`${this.direction}subscribers/${id}`)
+			.pipe(map((res) => res.items.slice(0, amount)));
+		}
 		return this.http
 			.get<Pageable<Profile>>(`${this.direction}subscribers/`)
 			.pipe(map((res) => res.items.slice(0, amount)));
