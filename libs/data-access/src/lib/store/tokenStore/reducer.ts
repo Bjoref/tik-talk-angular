@@ -15,8 +15,7 @@ export const tokenFeature = createFeature({
 		initialState,
 		on(tokenActions.refreshToken, (state, payload) => {
 			return {
-				...state,
-				count: payload.token,
+				token: payload.token,
 			};
 		}),
 	),

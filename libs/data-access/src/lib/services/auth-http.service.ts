@@ -1,18 +1,23 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, Signal } from '@angular/core';
 import { catchError, Observable, tap, throwError } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { AuthToken } from '../interfaces/auth.interface';
 import { HttpService } from './http.service';
+import { Store } from '@ngrx/store';
+import { selectTokenInfo, tokenActions } from '../store';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class AuthHttpService extends HttpService {
+	private store = inject(Store);
 	private direction: string = `${this.baseApiUrl}auth/`;
 
 	public token: string | null = null;
 	public refreshToken: string | null = null;
+
+	tokenStore = this.store.selectSignal(selectTokenInfo);
 
 	router = inject(Router);
 	cookieService = inject(CookieService);
@@ -22,6 +27,9 @@ export class AuthHttpService extends HttpService {
 			this.token = this.cookieService.get('token');
 			this.refreshToken = this.cookieService.get('refreshToken');
 		}
+
+		this.refreshTokenStore(this.token)
+
 		return !!this.token;
 	}
 
@@ -74,7 +82,17 @@ export class AuthHttpService extends HttpService {
 		this.token = val.access_token;
 		this.refreshToken = val.refresh_token;
 
+		this.refreshTokenStore(val.access_token)
+
 		this.cookieService.set('token', this.token);
 		this.cookieService.set('refreshToken', this.refreshToken);
+	}
+
+	refreshTokenStore(tokenInput: string) {
+		this.store.dispatch(
+			tokenActions.refreshToken({
+				token: tokenInput,
+			})
+		);
 	}
 }

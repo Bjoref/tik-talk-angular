@@ -100,7 +100,6 @@ export class ProfileComponent {
 					);
 				},
 				(err) => {
-					console.log(this.posts);
 					if (err.status === 404) {
 						this.store.dispatch(
 							postsActions.postsLoaded({ posts: [] })

@@ -1,6 +1,6 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { HttpService } from './http.service';
-import { map, Observable, take, tap } from 'rxjs';
+import { map, Observable, switchMap, take, tap } from 'rxjs';
 import { ProfileHttpService } from './profile-http.service';
 import { Chat, LastMessageRes, Message } from '../interfaces/chat.interface';
 import { AuthHttpService } from './auth-http.service';
@@ -10,6 +10,7 @@ import { isNewMessage, isUnreadMessage } from '../interfaces/type-guard';
 import { ChatWSRxjsService } from './chat-ws-rxjs.service';
 import { Store } from '@ngrx/store';
 import { messageActions } from '../store/messageStore';
+import { selectTokenInfo } from '../store';
 
 @Injectable({
 	providedIn: 'root',
@@ -20,16 +21,17 @@ export class ChatHttpService extends HttpService {
 	private directionMessage: string = `${this.baseApiUrl}message/`;
 	private directionChat: string = `${this.baseApiUrl}chat/`;
 	private me = inject(ProfileHttpService).me;
-	private authService = inject(AuthHttpService);
 
 	activeChatessages = signal<Message[]>([]);
 
-	wsApadter: ChatWSService = new ChatWSRxjsService();
+	token = this.store.selectSignal(selectTokenInfo);
+
+	wsAdapter: ChatWSService = new ChatWSRxjsService();
 
 	connectWS() {
-		return this.wsApadter.connect({
+		return this.wsAdapter.connect({
 			url: `${this.directionChat}ws`,
-			token: this.authService.token ?? '',
+			token: this.token() ?? '',
 			handleMessage: this.handleWSMessage,
 		}) as Observable<ChatWSMessage>;
 	}
@@ -47,6 +49,7 @@ export class ChatHttpService extends HttpService {
 			this.activeChatessages.set([
 				...this.activeChatessages(),
 				{
+					user: this.me()!,
 					id: message.data.id,
 					userFromId: message.data.author,
 					personalChatId: message.data.chat_id,
@@ -69,14 +72,6 @@ export class ChatHttpService extends HttpService {
 			.get<LastMessageRes[]>(`${this.directionChat}get_my_chats/`)
 			.pipe(
 				map((res) => {
-					console.log(res);
-					console.log(
-						res.sort(function (a, b) {
-							if (a.id < b.id) return 1;
-							if (a.id > b.id) return -1;
-							return 0;
-						})
-					);
 					return res.sort(function (a, b) {
 						if (a.createdAt < b.createdAt) return 1;
 						if (a.createdAt > b.createdAt) return -1;
@@ -90,7 +85,8 @@ export class ChatHttpService extends HttpService {
 		return this.http.get<Chat>(`${this.directionChat}${chatId}`).pipe(
 			map((chat) => {
 				this.filterToCreateDate(chat.messages);
-				const patchedMessages = chat.messages.map((message) => {
+				chat.messages = chat.messages.filter((message) => message.text.length > 0);
+				const patchedMessages = chat.messages.map((message, index) => {
 					return {
 						...message,
 						user:
@@ -109,7 +105,7 @@ export class ChatHttpService extends HttpService {
 							: chat.userFirst,
 					messages: patchedMessages,
 				};
-			})
+			}),
 		);
 	}
 
