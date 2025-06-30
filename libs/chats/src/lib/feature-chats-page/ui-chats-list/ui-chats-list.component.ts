@@ -5,6 +5,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { map, startWith, switchMap } from 'rxjs';
 import { ChatHttpService } from '@tt/data-access';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
 	selector: 'ui-chats-list',
@@ -22,7 +23,6 @@ export class UiChatsListComponent {
 	chatService = inject(ChatHttpService);
 
 	filterChatsControl = new FormControl('');
-
 	chats$ = this.chatService.getMyChats().pipe(
 		switchMap((chats) => {
 			return this.filterChatsControl.valueChanges.pipe(

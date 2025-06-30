@@ -36,17 +36,6 @@ export class UiChatsWorkspaceComponent {
 	);
 
 	onSendMessage(text: string) {
-		if (!text.length) return;
 		this.chatService.wsAdapter.sendMessage(text, this.id);
-		// this.getChatsInterval.unsubscribe();
-		// await firstValueFrom(this.chatService.sendMessage(this.id, text));
-
-		// await firstValueFrom(this.chatService.getChatById(this.id));
-
-		// this.getChatsInterval = this.chatInterval.subscribe(() => {
-		// 	if (this.id) {
-		// 		firstValueFrom(this.chatService.getChatById(this.id));
-		// 	}
-		// });
 	}
 }

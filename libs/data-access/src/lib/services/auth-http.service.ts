@@ -84,8 +84,8 @@ export class AuthHttpService extends HttpService {
 
 		this.refreshTokenStore(val.access_token)
 
-		this.cookieService.set('token', this.token);
-		this.cookieService.set('refreshToken', this.refreshToken);
+		this.cookieService.set('token', this.token, {path: '/'});
+		this.cookieService.set('refreshToken', this.refreshToken, {path: '/'});
 	}
 
 	refreshTokenStore(tokenInput: string) {

@@ -1,16 +1,19 @@
-import { inject, Injectable, signal } from '@angular/core';
+import { effect, inject, Injectable, signal } from '@angular/core';
 import { HttpService } from './http.service';
-import { map, Observable, switchMap, take, tap } from 'rxjs';
+import { firstValueFrom, map, Observable } from 'rxjs';
 import { ProfileHttpService } from './profile-http.service';
 import { Chat, LastMessageRes, Message } from '../interfaces/chat.interface';
-import { AuthHttpService } from './auth-http.service';
 import { ChatWSService } from '../interfaces/chats-ws-service.interface';
 import { ChatWSMessage } from '../interfaces/chat-ws-message.interface';
-import { isNewMessage, isUnreadMessage } from '../interfaces/type-guard';
+import {
+	isErrorMessage,
+	isNewMessage,
+	isUnreadMessage,
+} from '../interfaces/type-guard';
 import { ChatWSRxjsService } from './chat-ws-rxjs.service';
 import { Store } from '@ngrx/store';
 import { messageActions } from '../store/messageStore';
-import { selectTokenInfo } from '../store';
+import { lastMessageActions, selectTokenInfo } from '../store';
 
 @Injectable({
 	providedIn: 'root',
@@ -20,6 +23,7 @@ export class ChatHttpService extends HttpService {
 
 	private directionMessage: string = `${this.baseApiUrl}message/`;
 	private directionChat: string = `${this.baseApiUrl}chat/`;
+	private profileHttpService = inject(ProfileHttpService);
 	private me = inject(ProfileHttpService).me;
 
 	activeChatessages = signal<Message[]>([]);
@@ -37,7 +41,12 @@ export class ChatHttpService extends HttpService {
 	}
 
 	handleWSMessage = (message: ChatWSMessage) => {
-		if (!('action' in message)) return;
+		if (!isErrorMessage(message) && !('action' in message)) return;
+
+		if (isErrorMessage(message)) {
+			this.wsAdapter.disconnect();
+			return;
+		}
 
 		if (isUnreadMessage(message)) {
 			this.store.dispatch(
@@ -57,6 +66,7 @@ export class ChatHttpService extends HttpService {
 					createdAt: message.data.created_at,
 					isRead: false,
 					isMine: true,
+					isDate: false,
 					updatedAt: message.data.updated_at || '',
 				},
 			]);
@@ -72,11 +82,17 @@ export class ChatHttpService extends HttpService {
 			.get<LastMessageRes[]>(`${this.directionChat}get_my_chats/`)
 			.pipe(
 				map((res) => {
-					return res.sort(function (a, b) {
+					res.sort(function (a, b) {
 						if (a.createdAt < b.createdAt) return 1;
 						if (a.createdAt > b.createdAt) return -1;
 						return 0;
 					});
+					this.store.dispatch(
+						lastMessageActions.chatsLoaded({
+							chats: res,
+						})
+					);
+					return res;
 				})
 			);
 	}
@@ -85,7 +101,6 @@ export class ChatHttpService extends HttpService {
 		return this.http.get<Chat>(`${this.directionChat}${chatId}`).pipe(
 			map((chat) => {
 				this.filterToCreateDate(chat.messages);
-				chat.messages = chat.messages.filter((message) => message.text.length > 0);
 				const patchedMessages = chat.messages.map((message, index) => {
 					return {
 						...message,
@@ -105,7 +120,7 @@ export class ChatHttpService extends HttpService {
 							: chat.userFirst,
 					messages: patchedMessages,
 				};
-			}),
+			})
 		);
 	}
 
@@ -116,10 +131,10 @@ export class ChatHttpService extends HttpService {
 				a[i].isFirstMessage = true;
 			}
 			if (
-				new Date(a[i].createdAt).getDay() <
-				new Date(a[i + 1].createdAt).getDay()
+				new Date(a[i].createdAt).setHours(0, 0, 0, 0) <
+				new Date(a[i + 1].createdAt).setHours(0, 0, 0, 0)
 			) {
-				a[i].isDate = true;
+				a[i + 1].isDate = true;
 			}
 		}
 	}
@@ -134,5 +149,11 @@ export class ChatHttpService extends HttpService {
 				},
 			}
 		);
+	}
+
+	async ngOnInit() {
+		if(!this.me) {
+			await firstValueFrom(this.profileHttpService.getMe());
+		}
 	}
 }

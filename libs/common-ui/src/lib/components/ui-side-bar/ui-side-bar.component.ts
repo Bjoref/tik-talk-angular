@@ -1,14 +1,19 @@
-import { Component, inject, Signal } from '@angular/core';
+import { Component, DestroyRef, effect, inject, Signal } from '@angular/core';
 import { UiSvgComponent } from '../ui-svg/ui-svg.component';
 import { RouterModule } from '@angular/router';
-import { ChatHttpService, ProfileHttpService } from '@tt/data-access';
+import {
+	ChatHttpService,
+	ProfileHttpService,
+	selectTokenInfo,
+} from '@tt/data-access';
 import { ImgUrlPipe } from '@tt/shared';
 import { CommonModule } from '@angular/common';
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, Subscription, timer } from 'rxjs';
 import { UiSubscriberCardComponent } from '../ui-subscriber-card/ui-subscriber-card.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Store } from '@ngrx/store';
 import { selectCount } from 'libs/data-access/src/lib/store/messageStore';
+import { isErrorMessage } from 'libs/data-access/src/lib/interfaces/type-guard';
 
 @Component({
 	selector: 'ui-side-bar',
@@ -23,8 +28,12 @@ import { selectCount } from 'libs/data-access/src/lib/store/messageStore';
 	styleUrl: './ui-side-bar.component.scss',
 })
 export class UiSideBarComponent {
+	private destroyRef = inject(DestroyRef);
 	profileService = inject(ProfileHttpService);
 	store = inject(Store);
+	token = this.store.selectSignal(selectTokenInfo);
+
+	wsSubscribe!: Subscription;
 
 	me = this.profileService.me;
 
@@ -35,7 +44,11 @@ export class UiSideBarComponent {
 	private chatService = inject(ChatHttpService);
 
 	constructor() {
-		this.chatService.connectWS().pipe(takeUntilDestroyed()).subscribe();
+		effect(() => {
+			if (this.token()) {
+				this.reconnectToken();
+			}
+		});
 	}
 
 	menuItems = [
@@ -56,7 +69,22 @@ export class UiSideBarComponent {
 		},
 	];
 
-	async ngOnInit() {
+	async reconnectToken() {
 		await firstValueFrom(this.profileService.getMe());
+		await firstValueFrom(timer(2000));
+		this.connectWS();
+	}
+
+	connectWS() {
+		this.wsSubscribe?.unsubscribe();
+
+		this.wsSubscribe = this.chatService
+			.connectWS()
+			.pipe(takeUntilDestroyed(this.destroyRef))
+			.subscribe((mess) => {
+				if (isErrorMessage(mess)) {
+					this.reconnectToken();
+				}
+			});
 	}
 }

@@ -18,12 +18,10 @@ export class ChatWSRxjsService implements ChatWSService {
 			});
 		}
 
-		this.#socket
-        .pipe(takeUntilDestroyed())
-        .subscribe({
+		this.#socket.subscribe({
 			next: (msg) => params.handleMessage(msg),
 			error: (err) => console.log(err),
-			complete: () => console.log('complete')
+			complete: () => console.log('complete'),
 		});
 
 		return this.#socket.asObservable().pipe(
