@@ -29,5 +29,20 @@
 			justify-content: space-between;
 			color: var(--light-transparent-color);
 		}
+
+		&-content {
+			display: flex;
+			justify-content: space-between;
+			gap: 8px;
+		}
+
+		&-count {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 1px 5px;
+			background-color: var(--primary-color);
+			color: var(--dark-color);
+		}
 	}
 }

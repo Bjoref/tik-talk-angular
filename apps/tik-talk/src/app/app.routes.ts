@@ -13,6 +13,7 @@ import {
 	messageFeature,
 	tokenFeature,
 	lastMessagesFeature,
+	LastMessageEffects,
 } from '@tt/data-access';
 import { provideEffects } from '@ngrx/effects';
 
@@ -45,6 +46,7 @@ export const routes: Routes = [
 				loadChildren: () => chatsRoutes,
 				providers: [
 					provideState(lastMessagesFeature),
+					provideEffects(LastMessageEffects),
 				],
 			},
 		],

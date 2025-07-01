@@ -5,10 +5,3 @@ export const selectPosts = createSelector(
     postsFeature.selectPosts,
     (posts) => posts
 )
-
-export const selectComments = createSelector(
-    postsFeature.selectPosts,
-    (posts) => {
-        return posts
-    }
-)

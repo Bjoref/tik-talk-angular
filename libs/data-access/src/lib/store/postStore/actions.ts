@@ -5,6 +5,5 @@ export const postsActions = createActionGroup({
     source: 'posts',
     events: {
         'posts loaded': props<{posts: Post[]}>(),
-        'add comment': props<{comments: PostComment[]}>(),
     }
 })

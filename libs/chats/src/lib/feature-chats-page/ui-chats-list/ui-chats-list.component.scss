@@ -3,6 +3,7 @@
 
 :host {
 	display: block;
+	overflow-y: auto;
 	border-right: var(--light-border);
 }
 .ui-chats-list {

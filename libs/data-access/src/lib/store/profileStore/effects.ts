@@ -1,7 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { ProfileHttpService } from '@tt/data-access';
-import { profileActions } from './actions';
+import { profileActions, ProfileHttpService } from '@tt/data-access';
 import { map, switchMap, tap } from 'rxjs';
 
 @Injectable({

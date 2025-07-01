@@ -3,5 +3,15 @@ import { lastMessagesFeature } from "./reducer";
 
 export const selectLastMessages = createSelector(
     lastMessagesFeature.selectChats,
-    (chats) => chats
+    lastMessagesFeature.selectLastMessage,
+    (chats) => {
+        return chats
+    }
+)
+
+export const selectLastMessage = createSelector(
+    lastMessagesFeature.selectLastMessage,
+    (test) => {
+        return test
+    }
 )

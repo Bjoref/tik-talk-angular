@@ -8,9 +8,8 @@ import {
 	Renderer2,
 } from '@angular/core';
 import { UiChatsWorkspaceMessageComponent } from '../ui-chats-workspace-message';
-import { Chat } from '../../data/interfaces';
 import { debounceTime, Subject, takeUntil } from 'rxjs';
-import { ChatHttpService, UpdateHeightService } from '@tt/data-access';
+import { ChatHttpService, UpdateHeightService, Chat } from '@tt/data-access';
 import { CommonModule } from '@angular/common';
 import { ChatDayPipe } from '@tt/shared';
 

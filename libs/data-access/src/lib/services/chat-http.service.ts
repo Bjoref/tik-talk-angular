@@ -49,12 +49,26 @@ export class ChatHttpService extends HttpService {
 		}
 
 		if (isUnreadMessage(message)) {
+			console.log(message);
 			this.store.dispatch(
 				messageActions.messageUnread({ count: message.data.count })
 			);
+
+			this.getMyChats();
 		}
 
 		if (isNewMessage(message)) {
+			this.store.dispatch(
+				lastMessageActions.messageSend({ lastMessage: message })
+			);
+			const prevMessage =
+				this.activeChatessages()[this.activeChatessages().length - 1];
+			const isDate = this.isSameDay(
+				new Date(prevMessage.createdAt),
+				new Date(message.data.created_at)
+			)
+				? false
+				: true;
 			this.activeChatessages.set([
 				...this.activeChatessages(),
 				{
@@ -66,12 +80,20 @@ export class ChatHttpService extends HttpService {
 					createdAt: message.data.created_at,
 					isRead: false,
 					isMine: true,
-					isDate: false,
+					isDate: isDate,
 					updatedAt: message.data.updated_at || '',
 				},
 			]);
 		}
 	};
+
+	private isSameDay(date1: Date, date2: Date): boolean {
+		return (
+			date1.getFullYear() === date2.getFullYear() &&
+			date1.getMonth() === date2.getMonth() &&
+			date1.getDate() === date2.getDate()
+		);
+	}
 
 	createChat(userId: number): Observable<Chat> {
 		return this.http.post<Chat>(`${this.directionChat}${userId}`, {});
@@ -152,7 +174,7 @@ export class ChatHttpService extends HttpService {
 	}
 
 	async ngOnInit() {
-		if(!this.me) {
+		if (!this.me) {
 			await firstValueFrom(this.profileHttpService.getMe());
 		}
 	}

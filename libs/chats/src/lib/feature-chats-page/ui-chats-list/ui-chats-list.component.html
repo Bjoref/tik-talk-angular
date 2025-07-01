@@ -9,7 +9,7 @@
 	</label>
 </div>
 
-@for (chat of chats$ | async; track chat.id) {
+@for (chat of storeChats(); track chat.id) {
 <button
 	chats
 	[chat]="chat"
