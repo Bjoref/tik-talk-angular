@@ -1,4 +1,4 @@
-import { Component, inject, Signal, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Signal, signal } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
@@ -18,17 +18,15 @@ import {
 	UiPostFeedComponent,
 } from '@tt/common-ui';
 import {
-	catchError,
-	EMPTY,
 	firstValueFrom,
 	switchMap,
 	take,
 	tap,
-	throwError,
 } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 @Component({
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	selector: 'page-profile',
 	imports: [
 		UiProfileHeaderComponent,

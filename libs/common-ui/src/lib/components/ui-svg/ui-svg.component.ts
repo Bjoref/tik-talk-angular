@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
 	selector: 'svg[icon]',
 	template: '<svg:use [attr.xlink:href]="href"></svg:use>',

@@ -11,6 +11,8 @@ export class ChatWSRxjsService implements ChatWSService {
 	#socket: WebSocketSubject<ChatWSMessage> | null = null;
 
 	connect(params: ChatConnectionWSParams): Observable<ChatWSMessage> {
+				console.log('Сокет коннект');
+
 		if (!this.#socket) {
 			this.#socket = webSocket({
 				url: params.url,

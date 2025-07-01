@@ -48,7 +48,8 @@
 		"@nx/angular:component": {
 			"style": "scss",
 			"skipTests": "true",
-			"standalond": "true"
+			"standalond": "true",
+			"changeDetection": "OnPush"
 		}
 	}
 }

@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { ImgUrlPipe } from '@tt/shared';
 
 @Component({
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	selector: 'ui-avatar',
 	imports: [ImgUrlPipe],
 	templateUrl: './ui-avatar.component.html',

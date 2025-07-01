@@ -1,4 +1,5 @@
 import {
+	ChangeDetectionStrategy,
 	Component,
 	effect,
 	ElementRef,
@@ -14,6 +15,7 @@ import { CommonModule } from '@angular/common';
 import { ChatDayPipe } from '@tt/shared';
 
 @Component({
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	selector: 'ui-chats-workspace-messages-wrapper',
 	imports: [UiChatsWorkspaceMessageComponent, CommonModule, ChatDayPipe],
 	templateUrl: './ui-chats-workspace-messages-wrapper.component.html',

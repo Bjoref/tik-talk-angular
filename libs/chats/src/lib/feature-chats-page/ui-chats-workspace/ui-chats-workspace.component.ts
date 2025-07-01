@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { UiChatsWorkspaceHeaderComponent } from '../ui-chats-workspace-header';
 import { UiChatsWorkspaceMessagesWrapperComponent } from '../ui-chats-workspace-messages-wrapper';
 import { ActivatedRoute } from '@angular/router';
@@ -8,6 +8,7 @@ import { UiPostInputComponent } from '@tt/common-ui';
 import { ChatHttpService } from '@tt/data-access';
 
 @Component({
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	selector: 'ui-chats-workspace',
 	imports: [
 		UiChatsWorkspaceHeaderComponent,

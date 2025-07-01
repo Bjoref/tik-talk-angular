@@ -1,4 +1,5 @@
 import {
+	ChangeDetectionStrategy,
 	Component,
 	EventEmitter,
 	HostBinding,
@@ -13,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { Subject } from 'rxjs';
 
 @Component({
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	selector: 'ui-post-input',
 	imports: [UiAvatarComponent, UiSvgComponent, FormsModule],
 	templateUrl: './ui-post-input.component.html',

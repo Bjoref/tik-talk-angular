@@ -1,10 +1,11 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { UiProfileCardComponent, UiSearchFiltersComponent } from '@tt/common-ui';
 import { selectFilteredProfiles } from '@tt/data-access';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store'
 
 @Component({
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	selector: 'page-search',
 	imports: [UiProfileCardComponent, UiSearchFiltersComponent, CommonModule],
 	templateUrl: './search.component.html',

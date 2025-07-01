@@ -1,4 +1,5 @@
 import {
+	ChangeDetectionStrategy,
 	Component,
 	EventEmitter,
 	inject,
@@ -17,6 +18,7 @@ import { UiPostInputComponent } from '../ui-post-input/ui-post-input.component';
 import { UiCommentComponent } from '../ui-comment/ui-comment.component';
 
 @Component({
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	selector: 'ui-post',
 	imports: [
 		UiAvatarComponent,

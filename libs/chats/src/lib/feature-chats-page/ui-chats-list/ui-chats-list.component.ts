@@ -1,4 +1,4 @@
-import { Component, DestroyRef, effect, inject, Signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, effect, inject, Signal } from '@angular/core';
 import { UiChatsButtonComponent } from '../ui-chats-button';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
@@ -16,6 +16,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Store } from '@ngrx/store';
 
 @Component({
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	selector: 'ui-chats-list',
 	imports: [
 		UiChatsButtonComponent,

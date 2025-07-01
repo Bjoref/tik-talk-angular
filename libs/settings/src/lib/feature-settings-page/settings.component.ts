@@ -1,10 +1,11 @@
-import { Component, inject, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, ViewChild } from '@angular/core';
 import { UiProfileHeaderComponent, UiAvatarUploadComponent} from '@tt/common-ui';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ProfileHttpService, AuthHttpService } from '@tt/data-access';
 import { firstValueFrom } from 'rxjs';
 
 @Component({
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	selector: 'settings',
 	imports: [
 		UiProfileHeaderComponent,

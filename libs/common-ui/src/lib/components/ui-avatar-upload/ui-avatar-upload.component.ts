@@ -1,10 +1,11 @@
-import { Component, effect, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, inject, signal } from '@angular/core';
 import { UiSvgComponent } from '../ui-svg/ui-svg.component';
 import { DndDirective } from '@tt/shared';
 import { ProfileHttpService } from '@tt/data-access';
 import { FormsModule } from '@angular/forms';
 
 @Component({
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	selector: 'ui-avatar-upload',
 	imports: [UiSvgComponent, DndDirective, FormsModule],
 	templateUrl: './ui-avatar-upload.component.html',

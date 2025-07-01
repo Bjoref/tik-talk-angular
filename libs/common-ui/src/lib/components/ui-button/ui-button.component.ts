@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { UiSvgComponent } from '../ui-svg/ui-svg.component';
 
 @Component({
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	selector: 'ui-button',
 	imports: [CommonModule, UiSvgComponent],
 	templateUrl: './ui-button.component.html',

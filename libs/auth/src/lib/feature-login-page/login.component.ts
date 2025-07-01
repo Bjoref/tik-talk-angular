@@ -1,4 +1,5 @@
 import {
+	ChangeDetectionStrategy,
 	Component,
 	ElementRef,
 	inject,
@@ -18,6 +19,7 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	selector: 'page-login',
 	imports: [
 		ReactiveFormsModule,

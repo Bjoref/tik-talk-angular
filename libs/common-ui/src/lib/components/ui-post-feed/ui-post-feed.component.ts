@@ -1,4 +1,5 @@
 import {
+	ChangeDetectionStrategy,
 	Component,
 	ElementRef,
 	HostListener,
@@ -20,6 +21,7 @@ import { UiPostComponent } from '../ui-post/ui-post.component';
 import { Store } from '@ngrx/store';
 
 @Component({
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	selector: 'ui-post-feed',
 	imports: [UiPostInputComponent, UiPostComponent],
 	templateUrl: './ui-post-feed.component.html',

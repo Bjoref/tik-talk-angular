@@ -49,7 +49,6 @@ export class ChatHttpService extends HttpService {
 		}
 
 		if (isUnreadMessage(message)) {
-			console.log(message);
 			this.store.dispatch(
 				messageActions.messageUnread({ count: message.data.count })
 			);

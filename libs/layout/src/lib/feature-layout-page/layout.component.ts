@@ -1,8 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { UiSideBarComponent } from '@tt/common-ui';
 
 @Component({
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	selector: 'page-layout',
 	imports: [RouterOutlet, UiSideBarComponent],
 	templateUrl: './layout.component.html',

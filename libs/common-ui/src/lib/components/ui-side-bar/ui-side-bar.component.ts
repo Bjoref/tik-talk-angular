@@ -1,4 +1,4 @@
-import { Component, DestroyRef, effect, inject, Signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, effect, inject, Signal } from '@angular/core';
 import { UiSvgComponent } from '../ui-svg/ui-svg.component';
 import { RouterModule } from '@angular/router';
 import {
@@ -16,6 +16,7 @@ import { selectCount } from 'libs/data-access/src/lib/store/messageStore';
 import { isErrorMessage } from 'libs/data-access/src/lib/interfaces/type-guard';
 
 @Component({
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	selector: 'ui-side-bar',
 	imports: [
 		UiSvgComponent,
@@ -71,7 +72,7 @@ export class UiSideBarComponent {
 
 	async reconnectToken() {
 		await firstValueFrom(this.profileService.getMe());
-		await firstValueFrom(timer(2000));
+		// await firstValueFrom(timer(2000));
 		this.connectWS();
 	}
 

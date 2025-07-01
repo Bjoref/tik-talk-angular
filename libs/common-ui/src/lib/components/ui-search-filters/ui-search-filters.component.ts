@@ -1,11 +1,13 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { profileActions, ProfileHttpService, selectFilters } from '@tt/data-access';
 import { debounceTime, startWith, switchMap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Store } from '@ngrx/store'
 
+
 @Component({
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	selector: 'ui-search-filters',
 	imports: [ReactiveFormsModule],
 	templateUrl: './ui-search-filters.component.html',
