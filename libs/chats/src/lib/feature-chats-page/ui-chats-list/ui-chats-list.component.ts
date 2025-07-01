@@ -7,6 +7,7 @@ import { findIndex, map, startWith, Subscription, switchMap, tap } from 'rxjs';
 import {
 	ChatHttpService,
 	lastMessageActions,
+	LastMessageRes,
 	selectCount,
 	selectLastMessage,
 	selectLastMessages,
@@ -47,29 +48,6 @@ export class UiChatsListComponent {
 				}
 				this.chatSub = this.getChats();
 			}
-
-			if (this.last()) {
-				// if (this.last() !== null) {
-				// 	console.log(this.last());
-				// 	const elem = this.storeChats().find(
-				// 		(item) => item.id === this.last()!.data.chat_id
-				// 	);
-				// 	const index = this.storeChats().findIndex(
-				// 		(item) => item.id === this.last()!.data.chat_id
-				// 	);
-
-				// 	if (!elem) return;
-
-				// 	elem.createdAt = this.last()!.data.created_at;
-				// 	elem.message = this.last()!.data.message;
-
-				// 	this.store.dispatch(
-				// 		lastMessageActions.chatsLoaded({
-				// 			chats: this.storeChats().splice(index, 1, elem),
-				// 		})
-				// 	);
-				// }
-			}
 		});
 	}
 
@@ -102,6 +80,10 @@ export class UiChatsListComponent {
 				})
 			)
 			.subscribe();
+	}
+
+	readMessage(chat: LastMessageRes) {
+		this.store.dispatch(lastMessageActions.messageRead({ lastMessage: chat }));
 	}
 
 	filterChatsControl = new FormControl('');

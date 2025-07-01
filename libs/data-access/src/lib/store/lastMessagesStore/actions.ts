@@ -7,5 +7,6 @@ export const lastMessageActions = createActionGroup({
     events: {
         'chats loaded': props<{chats: LastMessageRes[]}>(),
         'message send': props<{ lastMessage: ChatWSNewMessage}>(),
+        'message read': props<{ lastMessage: LastMessageRes }>(),
     }
 })

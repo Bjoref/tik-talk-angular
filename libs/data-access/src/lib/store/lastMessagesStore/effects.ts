@@ -4,10 +4,10 @@ import { Store } from '@ngrx/store';
 import {
 	lastMessageActions,
 	LastMessageRes,
-	ProfileHttpService,
+	selectLastMessage,
 	selectLastMessages,
 } from '@tt/data-access';
-import { map, switchMap, tap } from 'rxjs';
+import { map } from 'rxjs';
 
 @Injectable({
 	providedIn: 'root',
@@ -17,8 +17,9 @@ export class LastMessageEffects {
 	store = inject(Store);
 
 	storeChats = this.store.selectSignal(selectLastMessages);
+	lastMessage = this.store.selectSignal(selectLastMessage);
 
-	filterProfiles = createEffect(() => {
+	updateMessageList = createEffect(() => {
 		return this.actions$.pipe(
 			ofType(lastMessageActions.messageSend),
 			map((val) => {
@@ -36,6 +37,40 @@ export class LastMessageEffects {
 							unreadMessages: item.unreadMessages,
 							message: val.lastMessage.data.message,
 							createdAt: val.lastMessage.data.created_at
+						}
+
+						newArray.push(newItem)
+
+					} else {
+						newArray.push(item)
+					}
+				})
+
+				return lastMessageActions.chatsLoaded({
+					chats: newArray
+				});
+			})
+		);
+	});
+
+	readMessage = createEffect(() => {
+		return this.actions$.pipe(
+			ofType(lastMessageActions.messageRead),
+			map((val) => {
+				const index = this.storeChats().findIndex(
+					(item) => item.id === val.lastMessage.id
+				);
+
+				let newArray:LastMessageRes[] = new Array()
+
+				this.storeChats().forEach((item, i) => {
+					if(i === index ) {
+						let newItem:LastMessageRes = {
+							id: item.id,
+							userFrom: item.userFrom,
+							unreadMessages: 0,
+							message: val.lastMessage.message,
+							createdAt: val.lastMessage.createdAt
 						}
 
 						newArray.push(newItem)
