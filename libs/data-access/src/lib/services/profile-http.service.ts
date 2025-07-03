@@ -11,10 +11,6 @@ export class ProfileHttpService extends HttpService {
 
 	me = signal<Profile | null>(null);
 
-	getTestsAccounts(): Observable<Profile[]> {
-		return this.http.get<Profile[]>(`${this.direction}test_accounts`);
-	}
-
 	getMe(): Observable<Profile> {
 		return this.http.get<Profile>(`${this.direction}me`).pipe(
 			tap((val) => {

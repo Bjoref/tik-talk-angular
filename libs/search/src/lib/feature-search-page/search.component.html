@@ -1,7 +1,14 @@
 <ui-search-filters></ui-search-filters>
 
 <div class="profile-card__wrapper">
-	@for(profile of profiles(); track profile.id) {
-	<ui-profile-card [profile]="profile"></ui-profile-card>
+	@for(profile of profiles(); track profile.id; let last = $last) {
+		<ui-profile-card [profile]="profile"></ui-profile-card>
+		@if(last) {
+			@defer(on viewport) {
+				<ui-scroll-trigger (loaded)="timeToFetch()"></ui-scroll-trigger>
+			} @placeholder {
+				<div></div>
+			}
+		}
 	}
 </div>

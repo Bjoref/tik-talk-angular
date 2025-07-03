@@ -12,6 +12,7 @@ import { UiPostComponent } from './ui-post/ui-post.component';
 import { UiPostFeedComponent } from './ui-post-feed/ui-post-feed.component';
 import { UiCommentComponent } from './ui-comment/ui-comment.component';
 import { UiPostInputComponent } from './ui-post-input/ui-post-input.component';
+import { UiScrollTriggerComponent } from './ui-scroll-trigger/ui-scroll-trigger.component'
 
 export {
 	UiAvatarComponent,
@@ -27,5 +28,6 @@ export {
 	UiPostComponent,
 	UiCommentComponent,
 	UiPostInputComponent,
-	UiPostFeedComponent
+	UiPostFeedComponent,
+	UiScrollTriggerComponent
 };

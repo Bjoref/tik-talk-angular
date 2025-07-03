@@ -6,7 +6,7 @@ import { inject, Injectable } from '@angular/core';
 })
 export class HttpService {
 	protected http = inject(HttpClient);
-	protected baseApiUrl: string = 'https://icherniakov.ru/yt-course/';
+	protected baseApiUrl: string = '/yt-course/';
 
 	constructor() {}
 }
