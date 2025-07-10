@@ -12,7 +12,6 @@ export default [
 				'error',
 				{
 					type: 'attribute',
-					prefix: 'tt',
 					style: 'camelCase',
 				},
 			],
@@ -20,7 +19,6 @@ export default [
 				'error',
 				{
 					type: 'element',
-					prefix: 'tt',
 					style: 'kebab-case',
 				},
 			],

@@ -1,17 +1,27 @@
-import { ChangeDetectionStrategy, Component, inject, ViewChild } from '@angular/core';
-import { UiProfileHeaderComponent, UiAvatarUploadComponent} from '@tt/common-ui';
+import {
+	ChangeDetectionStrategy,
+	Component,
+	inject,
+	ViewChild,
+} from '@angular/core';
+import {
+	UiProfileHeaderComponent,
+	UiAvatarUploadComponent,
+} from '@tt/common-ui';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ProfileHttpService, AuthHttpService } from '@tt/data-access';
 import { firstValueFrom } from 'rxjs';
+import { UiStackInputComponent } from "../../../../common-ui/src/lib/components/ui-stack-input/ui-stack-input.component";
 
 @Component({
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	selector: 'settings',
 	imports: [
-		UiProfileHeaderComponent,
-		ReactiveFormsModule,
-		UiAvatarUploadComponent,
-	],
+    UiProfileHeaderComponent,
+    ReactiveFormsModule,
+    UiAvatarUploadComponent,
+    UiStackInputComponent
+],
 	templateUrl: './settings.component.html',
 	styleUrl: './settings.component.scss',
 })
@@ -20,6 +30,7 @@ export class SettingsComponent {
 
 	profileService = inject(ProfileHttpService);
 	authHttpService = inject(AuthHttpService);
+	private me = this.profileService.me;
 
 	fb = inject(FormBuilder);
 
@@ -28,12 +39,14 @@ export class SettingsComponent {
 		lastName: ['', Validators.required],
 		username: [{ value: '', disabled: true }, Validators.required],
 		description: [''],
-		stack: [''],
+		stack: [['']],
 	});
 
 	onSave(): void {
 		this.form.markAllAsTouched();
 		this.form.updateValueAndValidity();
+
+		console.log(this.form.value.stack)
 
 		if (this.form.invalid) return;
 
@@ -66,6 +79,19 @@ export class SettingsComponent {
 		if (!stack) return '';
 
 		return stack;
+	}
+
+	async ngOnInit() {
+		if (!this.me()) {
+			await firstValueFrom(this.profileService.getMe());
+			this.form.patchValue({
+				firstName: this.me()?.firstName,
+				lastName: this.me()?.lastName,
+				username: this.me()?.username,
+				description: this.me()?.description,
+				stack: this.me()?.stack,
+			});
+		}
 	}
 
 	logout() {

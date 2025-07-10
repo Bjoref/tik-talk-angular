@@ -17,16 +17,18 @@ import { FormInput, AuthHttpService } from '@tt/data-access';
 import { UiButtonComponent } from '@tt/common-ui';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { UiInputComponent } from "../../../../common-ui/src/lib/components/ui-input/ui-input.component";
 
 @Component({
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	selector: 'page-login',
 	imports: [
-		ReactiveFormsModule,
-		UiButtonComponent,
-		LoginMouseOverDirective,
-		CommonModule,
-	],
+    ReactiveFormsModule,
+    UiButtonComponent,
+    LoginMouseOverDirective,
+    CommonModule,
+    UiInputComponent
+],
 	templateUrl: './login.component.html',
 	styleUrl: './login.component.scss',
 })
@@ -39,10 +41,16 @@ export class LoginComponent {
 	@ViewChild('usernameInput', { read: ElementRef, static: true })
 	usernameInput?: ElementRef<unknown>;
 
+	ngOnInit() {
+		this.form.valueChanges.subscribe(val => {
+			console.log(val)
+		})
+	}
+
 	ngAfterViewInit(): void {
-		setTimeout(() => {
-			(this.usernameInput?.nativeElement as any).focus();
-		}, 100);
+		// setTimeout(() => {
+		// 	(this.usernameInput?.nativeElement as any).focus();
+		// }, 100);
 	}
 
 	public inputs: FormInput[] = [

@@ -7,6 +7,11 @@
 	padding: 20px 12px;
 	background-color: var(--dark-color);
 	height: 100vh;
+
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 300px;
 }
 
 .side-bar {

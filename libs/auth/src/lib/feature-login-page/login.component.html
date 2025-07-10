@@ -2,25 +2,14 @@
 	<h1 class="login__title">Вход</h1>
 
 	<div class="login__inputs">
-		<label class="login__label">
-			<span class="login__label-text"> Telegram username </span>
-			<div class="login__input-content">
-				<input
-					formControlName="username"
-					type="text"
-					placeholder="Введите логин"
-					autocomplete="on"
-					class="login__input"
-					#usernameInput
-					[ngClass]="{
-						error:
-							form.controls['username'].invalid &&
-							(form.controls['username'].touched ||
-								form.controls['username'].dirty)
-					}"
-				/>
-			</div>
-		</label>
+		<ui-input
+			type="text"
+			placeholder="Введите логин"
+			labelText="Telegram username"
+			formControlName="username"
+		>
+			Telegram username
+		</ui-input>
 
 		<label class="login__label">
 			<span class="login__label-text"> Пароль </span>
