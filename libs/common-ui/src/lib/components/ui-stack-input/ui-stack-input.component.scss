@@ -1,0 +1,54 @@
+@use 'indents' as *;
+@use 'typography' as *;
+
+.ui-stack-input {
+	&__control {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 12px;
+		padding: 12px 0;
+		border: none;
+		border-bottom: var(--light-border);
+		background: none;
+		@include text-regular-2;
+	}
+
+	&__label {
+		&-text {
+			color: var(--light-transparent-color);
+			@include text-medium-1;
+		}
+	}
+
+	&__tags {
+		display: inline-flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: $indent-s;
+		padding: $indent-xs $indent-s;
+		border-radius: $indent-xs;
+		border: var(--light-border);
+	}
+
+	&__delete-button {
+		font-size: 12px;
+		font-weight: 700;
+		background: none;
+		cursor: pointer;
+	}
+
+	&__svg {
+		width: 10px;
+		height: 10px;
+	}
+
+	&__ghost-input {
+		height: 33px;
+		border: none;
+		background: none;
+		@include text-regular-2;
+
+		outline: none;
+	}
+}

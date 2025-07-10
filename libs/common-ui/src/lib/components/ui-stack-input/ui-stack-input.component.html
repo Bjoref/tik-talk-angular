@@ -1,0 +1,18 @@
+<span class="ui-stack-input__label-text">Навыки</span>
+<div class="ui-stack-input__control">
+
+	@for(tech of value$ | async; track tech; let i = $index) {
+	<div class="ui-stack-input__tags">
+		<button class="ui-stack-input__delete-button" type="button" (click)="onTagDelete(i)">
+            <svg class="ui-stack-input__svg" icon="delete-cross"></svg>
+		</button>
+        {{ tech }}
+	</div>
+	}
+
+	<input
+		[(ngModel)]="innerInput"
+		type="text"
+		class="ui-stack-input__ghost-input"
+	/>
+</div>
