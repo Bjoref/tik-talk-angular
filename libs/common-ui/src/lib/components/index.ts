@@ -15,6 +15,7 @@ import { UiPostInputComponent } from './ui-post-input/ui-post-input.component';
 import { UiScrollTriggerComponent } from './ui-scroll-trigger/ui-scroll-trigger.component';
 import { UiInputComponent } from './ui-input/ui-input.component';
 import { UiStackInputComponent } from './ui-stack-input/ui-stack-input.component'
+import { UiAddressInputComponent } from './ui-address-input/ui-address-input.component'
 
 export {
 	UiAvatarComponent,
@@ -33,5 +34,6 @@ export {
 	UiPostFeedComponent,
 	UiScrollTriggerComponent,
 	UiInputComponent,
-	UiStackInputComponent
+	UiStackInputComponent,
+	UiAddressInputComponent
 };

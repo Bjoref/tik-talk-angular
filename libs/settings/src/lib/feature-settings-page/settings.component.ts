@@ -7,11 +7,12 @@ import {
 import {
 	UiProfileHeaderComponent,
 	UiAvatarUploadComponent,
+	UiStackInputComponent,
+	UiAddressInputComponent
 } from '@tt/common-ui';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ProfileHttpService, AuthHttpService } from '@tt/data-access';
 import { firstValueFrom } from 'rxjs';
-import { UiStackInputComponent } from "../../../../common-ui/src/lib/components/ui-stack-input/ui-stack-input.component";
 
 @Component({
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -20,7 +21,8 @@ import { UiStackInputComponent } from "../../../../common-ui/src/lib/components/
     UiProfileHeaderComponent,
     ReactiveFormsModule,
     UiAvatarUploadComponent,
-    UiStackInputComponent
+    UiStackInputComponent,
+    UiAddressInputComponent
 ],
 	templateUrl: './settings.component.html',
 	styleUrl: './settings.component.scss',
@@ -40,15 +42,16 @@ export class SettingsComponent {
 		username: [{ value: '', disabled: true }, Validators.required],
 		description: [''],
 		stack: [['']],
+		city: [''],
 	});
 
 	onSave(): void {
 		this.form.markAllAsTouched();
 		this.form.updateValueAndValidity();
 
-		console.log(this.form.value.stack)
-
 		if (this.form.invalid) return;
+
+		console.log(this.form.controls)
 
 		firstValueFrom(
 			//@ts-ignore
@@ -84,14 +87,18 @@ export class SettingsComponent {
 	async ngOnInit() {
 		if (!this.me()) {
 			await firstValueFrom(this.profileService.getMe());
-			this.form.patchValue({
-				firstName: this.me()?.firstName,
-				lastName: this.me()?.lastName,
-				username: this.me()?.username,
-				description: this.me()?.description,
-				stack: this.me()?.stack,
-			});
 		}
+		this.form.patchValue({
+			firstName: this.me()?.firstName,
+			lastName: this.me()?.lastName,
+			username: this.me()?.username,
+			description: this.me()?.description,
+			stack: this.me()?.stack,
+			city: this.me()?.city,
+		});
+
+		console.log(this.form.controls)
+		console.log(this.me()?.city)
 	}
 
 	logout() {

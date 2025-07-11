@@ -41,12 +41,6 @@ export class LoginComponent {
 	@ViewChild('usernameInput', { read: ElementRef, static: true })
 	usernameInput?: ElementRef<unknown>;
 
-	ngOnInit() {
-		this.form.valueChanges.subscribe(val => {
-			console.log(val)
-		})
-	}
-
 	ngAfterViewInit(): void {
 		// setTimeout(() => {
 		// 	(this.usernameInput?.nativeElement as any).focus();

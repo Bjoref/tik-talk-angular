@@ -2,7 +2,6 @@
 	"name": "profile",
 	"$schema": "../../node_modules/nx/schemas/project-schema.json",
 	"sourceRoot": "libs/profile/src",
-	"prefix": "tt",
 	"projectType": "library",
 	"tags": [],
 	"targets": {

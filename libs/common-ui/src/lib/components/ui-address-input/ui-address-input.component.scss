@@ -1,0 +1,36 @@
+@use 'indents' as *;
+@use 'typography' as *;
+
+:host {
+	position: relative;
+}
+
+.ui-address-input {
+	&__dropdown {
+		display: flex;
+		flex-direction: column;
+		gap: $indent-xs;
+		position: absolute;
+		padding: 10px;
+		background: var(--grey-color);
+	}
+
+	&__suggestion-button {
+		border: none;
+		background: none;
+		cursor: pointer;
+
+		&:hover {
+			background-color: var(--primary-color);
+			color: var(--dark-color);
+		}
+	}
+
+	&__input {
+		width: 100%;
+		background: var(--dark-color);
+		padding: 12px 50px 12px 20px;
+		border: var(--light-border);
+		border-radius: $indent-xs;
+	}
+}

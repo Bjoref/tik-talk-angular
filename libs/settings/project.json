@@ -2,7 +2,6 @@
 	"name": "settings",
 	"$schema": "../../node_modules/nx/schemas/project-schema.json",
 	"sourceRoot": "libs/settings/src",
-	"prefix": "tt",
 	"projectType": "library",
 	"tags": [],
 	"targets": {

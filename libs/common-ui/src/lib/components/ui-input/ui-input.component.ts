@@ -18,7 +18,6 @@ import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModu
 })
 export class UiInputComponent implements ControlValueAccessor {
 	type = input<'text' | 'password'>('text');
-	placeholder = input<string>();
 	labelText = input<string>();
 
 	onChange: any;
@@ -40,7 +39,4 @@ export class UiInputComponent implements ControlValueAccessor {
 	onModelChange(val: string | null):void  {
 		this.onChange(val)
 	}
-	
-
-
 }

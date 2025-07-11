@@ -6,6 +6,7 @@ import { PostHttpService } from './post-http.service';
 import { PostService } from './post.service';
 import { CommentHttpService } from './comment-http.service';
 import { AuthHttpService } from './auth-http.service'
+import { DadataService } from './dadata.service'
 
 export {
 	HttpService,
@@ -16,4 +17,5 @@ export {
     PostService,
     CommentHttpService,
 	AuthHttpService,
+	DadataService,
 };

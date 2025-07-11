@@ -1,0 +1,19 @@
+<input
+	[formControl]="innerSearchControl"
+	type="text"
+	class="ui-address-input__input"
+	(blur)="onTouched()"
+/>
+
+@if(suggestions$ | async; as suggestions) { @if(isDropdownOpened()) {
+<div class="ui-address-input__dropdown">
+	@for(suggestion of suggestions; track suggestion ) {
+	<button
+		class="ui-address-input__suggestion-button"
+		(click)="onSuggestionPick(suggestion)"
+	>
+		{{ suggestion }}
+	</button>
+	}
+</div>
+} }

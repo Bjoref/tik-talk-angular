@@ -2,14 +2,11 @@
     <span class="ui-input__label-text"> {{ labelText() }} </span>
 	<div class="ui-input__input-content">    
 		<input
-            [ngModel]="value"
+            [(ngModel)]="value"
             (ngModelChange)="onModelChange($event)"
 			[type]="type()"
-			[placeholder]="placeholder()"
-			autocomplete="on"
 			class="ui-input__input"
-            (blue)="onTouched"
-			#usernameInput
+            (blur)="onTouched"
 		/>
 	</div>
 </label>

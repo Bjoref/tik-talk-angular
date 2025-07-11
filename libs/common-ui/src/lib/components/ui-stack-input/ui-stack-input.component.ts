@@ -51,7 +51,6 @@ export class UiStackInputComponent implements ControlValueAccessor {
 	}
 
 	writeValue(val: string[] | null): void {
-		console.log(val);
 		if (!val) {
 			this.value$.next([]);
 
