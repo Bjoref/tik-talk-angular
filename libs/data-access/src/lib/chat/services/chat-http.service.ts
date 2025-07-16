@@ -1,19 +1,19 @@
-import { effect, inject, Injectable, signal } from '@angular/core';
-import { HttpService } from './http.service';
+import { inject, Injectable, signal } from '@angular/core';
 import { firstValueFrom, map, Observable } from 'rxjs';
-import { ProfileHttpService } from './profile-http.service';
 import { Chat, LastMessageRes, Message } from '../interfaces/chat.interface';
 import { ChatWSService } from '../interfaces/chats-ws-service.interface';
 import { ChatWSMessage } from '../interfaces/chat-ws-message.interface';
+import { ChatWSRxjsService } from './chat-ws-rxjs.service';
+import { Store } from '@ngrx/store';
+import { messageActions } from '../../store/messageStore';
+import { lastMessageActions, selectTokenInfo } from '../../store';
 import {
+	HttpService,
 	isErrorMessage,
 	isNewMessage,
 	isUnreadMessage,
-} from '../interfaces/type-guard';
-import { ChatWSRxjsService } from './chat-ws-rxjs.service';
-import { Store } from '@ngrx/store';
-import { messageActions } from '../store/messageStore';
-import { lastMessageActions, selectTokenInfo } from '../store';
+} from '../../common';
+import { ProfileHttpService } from '../../profile';
 
 @Injectable({
 	providedIn: 'root',

@@ -3,9 +3,9 @@ import { catchError, Observable, tap, throwError } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { AuthToken } from '../interfaces/auth.interface';
-import { HttpService } from './http.service';
 import { Store } from '@ngrx/store';
-import { selectTokenInfo, tokenActions } from '../store';
+import { selectTokenInfo, tokenActions } from '../../store';
+import { HttpService } from '../../common';
 
 @Injectable({
 	providedIn: 'root',

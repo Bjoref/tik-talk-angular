@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpService } from './http.service';
-import { DADATA_TOKEN } from './token';
 import { map, Observable } from 'rxjs';
 import { DadataInnerRes, DadataResponse } from '../interfaces/dadata.interface';
+import { HttpService } from '../../common/services';
+import { DADATA_TOKEN } from '../../common/services/token';
 
 @Injectable({
 	providedIn: 'root',

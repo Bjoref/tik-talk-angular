@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CommentCreateDto, PostComment } from '../interfaces/post.interface';
-import { HttpService } from './http.service';
+import { HttpService } from '../../common';
 
 @Injectable({
 	providedIn: 'root',

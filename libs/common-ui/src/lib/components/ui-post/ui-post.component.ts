@@ -8,8 +8,6 @@ import {
 	signal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { firstValueFrom } from 'rxjs';
-
 import { DateConverterPipe } from '@tt/shared';
 import { PostComment, Post, EmitPostData, PostHttpService } from '@tt/data-access';
 import { UiAvatarComponent } from '../ui-avatar/ui-avatar.component';

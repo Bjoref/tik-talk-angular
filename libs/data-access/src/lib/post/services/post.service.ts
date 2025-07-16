@@ -1,9 +1,9 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { CommentHttpService } from './comment-http.service';
 import { Observable, of } from 'rxjs';
 import { PostHttpService } from './post-http.service';
 import { Post, PostComment } from '../interfaces/post.interface';
-import { Profile } from '../interfaces';
+import { Profile } from '../../profile';
 
 @Injectable({
 	providedIn: 'root',

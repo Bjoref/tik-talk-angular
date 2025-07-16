@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 import {
 	ChatHttpService,
 	Post,
-	PostHttpService,
 	postsActions,
 	ProfileHttpService,
 	selectPosts,
@@ -24,6 +23,7 @@ import {
 	tap,
 } from 'rxjs';
 import { Store } from '@ngrx/store';
+import { PostHttpService } from 'libs/data-access/src/lib/post/services/post-http.service';
 
 @Component({
 	changeDetection: ChangeDetectionStrategy.OnPush,

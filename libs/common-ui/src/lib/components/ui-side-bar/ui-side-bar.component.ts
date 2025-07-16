@@ -3,6 +3,7 @@ import { UiSvgComponent } from '../ui-svg/ui-svg.component';
 import { RouterModule } from '@angular/router';
 import {
 	ChatHttpService,
+	isErrorMessage,
 	ProfileHttpService,
 	selectTokenInfo,
 } from '@tt/data-access';
@@ -13,7 +14,6 @@ import { UiSubscriberCardComponent } from '../ui-subscriber-card/ui-subscriber-c
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Store } from '@ngrx/store';
 import { selectCount } from 'libs/data-access/src/lib/store/messageStore';
-import { isErrorMessage } from 'libs/data-access/src/lib/interfaces/type-guard';
 
 @Component({
 	changeDetection: ChangeDetectionStrategy.OnPush,

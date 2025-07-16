@@ -1,7 +1,6 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Post, PostCreateDto } from '../interfaces/post.interface';
-import { HttpService } from './http.service';
-import { Store } from '@ngrx/store';
+import { HttpService } from '../../common';
 
 @Injectable({
 	providedIn: 'root',

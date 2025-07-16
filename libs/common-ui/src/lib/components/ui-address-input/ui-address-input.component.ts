@@ -15,8 +15,8 @@ import {
 	NG_VALUE_ACCESSOR,
 	ReactiveFormsModule,
 } from '@angular/forms';
-import { DadataService } from '@tt/data-access';
 import { debounceTime, switchMap, tap } from 'rxjs';
+import { DadataService } from '@tt/data-access';
 
 @Component({
 	selector: 'ui-address-input',

@@ -1,11 +1,10 @@
-import { catchError, finalize, Observable, tap } from 'rxjs';
+import { finalize, Observable, tap } from 'rxjs';
 import { ChatWSMessage } from '../interfaces/chat-ws-message.interface';
 import {
 	ChatConnectionWSParams,
 	ChatWSService,
 } from '../interfaces/chats-ws-service.interface';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 export class ChatWSRxjsService implements ChatWSService {
 	#socket: WebSocketSubject<ChatWSMessage> | null = null;

@@ -1,6 +1,6 @@
 import { createActionGroup, props } from "@ngrx/store";
-import { LastMessageRes } from "../../interfaces/chat.interface";
-import { ChatWSNewMessage } from "../../interfaces/chat-ws-message.interface";
+import { ChatWSNewMessage } from "../../chat/interfaces/chat-ws-message.interface";
+import { LastMessageRes } from "../../chat";
 
 export const lastMessageActions = createActionGroup({
     source: 'last chats',

@@ -1,7 +1,7 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { lastMessageActions } from './actions';
-import { LastMessageRes } from '../../interfaces/chat.interface';
-import { ChatWSNewMessage } from '../../interfaces/chat-ws-message.interface';
+import { ChatWSNewMessage } from '../../chat/interfaces/chat-ws-message.interface';
+import { LastMessageRes } from '../../chat';
 
 export interface LastMessagesState {
 	chats: LastMessageRes[];

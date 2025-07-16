@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { UiAvatarComponent } from '@tt/common-ui';
+import { LastMessageRes } from '@tt/data-access';
 import { DateConverterPipe } from '@tt/shared';
-import { LastMessageRes } from 'libs/data-access/src/lib/interfaces/chat.interface';
 
 @Component({
 	changeDetection: ChangeDetectionStrategy.OnPush,

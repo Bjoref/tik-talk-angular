@@ -11,8 +11,8 @@ import {
 	UiAddressInputComponent
 } from '@tt/common-ui';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
-import { ProfileHttpService, AuthHttpService } from '@tt/data-access';
 import { firstValueFrom } from 'rxjs';
+import { AuthHttpService, ProfileHttpService } from '@tt/data-access';
 
 @Component({
 	changeDetection: ChangeDetectionStrategy.OnPush,

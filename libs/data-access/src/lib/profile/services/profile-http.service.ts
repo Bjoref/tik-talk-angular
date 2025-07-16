@@ -1,7 +1,8 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { map, Observable, tap } from 'rxjs';
-import { HttpService } from './http.service';
-import { Pageable, Profile } from '../interfaces';
+import { HttpService } from '../../common/services';
+import { Profile } from '../interfaces';
+import { Pageable } from '../../post';
 
 @Injectable({
 	providedIn: 'root',
